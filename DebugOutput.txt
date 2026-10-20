@@ -1,83 +1,6 @@
-[chris@arch5580 openage]$ cd "$HOME/Games/AOEII-Linux-ChatGPT/src/openage"
 
-printf '\n=== Exact QML module and presenter references ===\n'
-rg -n -i -C 3 \
-  'qmlRegister|yay\.sfttech\.openage|yay\.sfttech\.livereload|openage presenter test|test/qml|main\.qml|set.*qml.*root' \
-  . \
-  --glob '!*.nyan' \
-  --glob '!*.lock' \
-  --glob '!*.json' \
-  --glob '!*.svg' \
-  --glob '!*.png' \
-  --glob '!*.jpg' \
-  --glob '!*.toml' \
-  --glob '!*.git/**' \
-  2>/dev/null | head -260
-
-printf '\n=== Top-level build and launcher layout ===\n'
-ls -la
-printf '\n=== Launcher details ===\n'
-sed -n '1,220p' bin/run
-
-printf '\n=== Native build artifacts outside bin ===\n'
-find . -type f \( \
-  -name '*.so' -o -name '*.so.*' -o \
-  -name 'CMakeCache.txt' -o -name 'build.ninja' \
-  \) -print 2>/dev/null | head -120
-
-printf '\n=== GUI source files ===\n'
-find libopenage -type f \( \
-  -name '*.cpp' -o -name '*.h' -o \
-  -name '*.hpp' -o -name '*.pyx' -o -name '*.py' \
-  \) -print 2>/dev/null |
-  grep -Ei 'gui|present|main|engine' | head -160
-
-printf '\n=== Git status ===\n'
-git status --short
-
-=== Exact QML module and presenter references ===
-
-=== Top-level build and launcher layout ===
-total 288
-drwxr-xr-x 17 chris users  4096 Oct 19 19:08 .
-drwxr-xr-x  3 chris users  4096 Oct 19 17:12 ..
--rw-r--r--  1 chris users 10704 Oct 19 17:13 AGENTS.md
-drwxr-xr-x  9 chris users  4096 Oct 19 17:44 assets
-drwxr-xr-x  3 chris users  4096 Oct 19 17:23 .bin
-lrwxrwxrwx  1 chris users    34 Oct 19 19:08 bin -> .bin/g++-debug-Oauto-sanitize-none
-drwxr-xr-x  7 chris users  4096 Oct 19 17:23 buildsystem
-drwxr-xr-x  3 chris users  4096 Oct 19 17:13 cfg
--rw-r--r--  1 chris users   317 Oct 19 17:13 changelog.md
--rw-r--r--  1 chris users    56 Oct 19 17:13 .clangd
--rw-r--r--  1 chris users  3850 Oct 19 17:13 .clang-format
--rw-r--r--  1 chris users  7981 Oct 19 17:13 CMakeLists.txt
--rwxr-xr-x  1 chris users 14036 Oct 19 17:13 configure
--rw-r--r--  1 chris users 23851 Oct 19 17:13 copying.md
-drwxr-xr-x  2 chris users  4096 Oct 19 17:13 dist
-drwxr-xr-x 12 chris users  4096 Oct 19 17:13 doc
-drwxr-xr-x  3 chris users  4096 Oct 19 17:13 etc
--rw-r--r--  1 chris users  1494 Oct 19 17:13 flake.lock
--rw-r--r--  1 chris users  1526 Oct 19 17:13 flake.nix
-drwxr-xr-x  7 chris users  4096 Oct 19 20:02 .git
-drwxr-xr-x  4 chris users  4096 Oct 19 17:13 .github
--rw-r--r--  1 chris users   833 Oct 19 17:13 .gitignore
--rw-r--r--  1 chris users   792 Oct 19 17:13 kevinfile
-drwxr-xr-x  2 chris users  4096 Oct 19 17:13 legal
-drwxr-xr-x 26 chris users  4096 Oct 19 17:13 libopenage
--rw-r--r--  1 chris users  1625 Oct 19 17:13 .mailmap
--rw-r--r--  1 chris users  6065 Oct 19 17:13 Makefile
-drwxr-xr-x  2 chris users  4096 Oct 19 17:13 nix
-drwxr-xr-x 19 chris users  4096 Oct 19 18:18 openage
--rw-r--r--  1 chris users     6 Oct 19 17:13 openage_version
-drwxr-xr-x  3 chris users  4096 Oct 19 17:13 packaging
--rw-r--r--  1 chris users  2385 Oct 19 17:13 pyproject.toml
--rw-r--r--  1 chris users 11897 Oct 19 17:13 README.md
--rwxr-xr-x  1 chris users  1197 Oct 19 17:13 run.py.in
--rw-r--r--  1 chris users   802 Oct 19 17:13 shell.nix
--rw-r--r--  1 chris users 94046 Oct 19 17:13 uv.lock
-drwxr-xr-x  4 chris users  4096 Oct 19 17:21 .venv
-
-=== Launcher details ===
+=== Build launcher details ===
+.bin/g++-debug-Oauto-sanitize-none/run: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 6.1.0, BuildID[sha1]=f112696e92811c60ddd87ecf596eca79b1e478a8, with debug_info, not stripped
 ELF>�&@�	@8
 @*)@@@0pppddXmX}X}�0hmh}h}P���0���DDP�tdTbTbTb��Q�tdR�tdXmX}X}�/lib64/ld-linux-x86-64.so.2 GNU���GNUGNU�in��`��~�Yn�y��x�@{�"��������*9Qbu������2G^o�����!<JWp������GUm����*6_m~����/:M^����".J d � 4P�l����(���`�@�-P���x`�����h��@����`��N���� � �� ?���__libc_start_mainGLIBC_2.34libc.so.6_end_edata__bss_start_ZSt21ios_base_library_initvGLIBCXX_3.4.32libstdc++.so.6__stack_chk_failGLIBC_2.4__cxa_finalizeGLIBC_2.2.5PyMem_RawFreePy_DecodeLocalefreefwritestderrstrdupsetlocalemallocPyErr_PrintPy_FinalizeExPyImport_ImportModulePyConfig_ClearPy_InitializeFromConfigPyConfig_SetArgvPyStatus_ExceptionPyConfig_SetStringPyConfig_InitPythonConfigPyImport_AppendInittabPyModule_NewObjectPyInterpreterState_GetIDPyThreadState_GetPyObject_GetAttrStringPyDict_SetItemPyDict_SetItemStringPyDict_GetItemStringPyImport_GetModuleDictPyObject_SetAttrPyUnicode_FromStringAndSizePyBytes_FromStringAndSizePyObject_SetAttrString__assert_failPyImport_AddModuleRefPyModule_GetDictPyExc_RuntimeErrorPyTraceBack_HerePyFrame_NewPyThreadState_GetUncheckedPyMem_ReallocPyMem_MallocPyException_SetTracebackPyCode_NewEmptyPyUnicode_AsUTF8PyUnicode_FromFormatPyExc_ImportErrorPyUnicode_ConcatPyUnicode_FromStringPyModule_GetNamePyErr_ExceptionMatchesPyExc_AttributeErrorPyImport_ImportModuleLevelObjectPyDict_NewPyObject_HashPyUnicode_InternInPlacePyUnicode_DecodeUTF8PyUnicode_SubstringPyObject_HasAttrWithErrorPyUnicode_FindCharPyObject_VectorcallMethodPyList_TypePyUnicode_EqualPyUnicode_TypePyObject_RichComparePyFloat_Type_Py_DeallocPyObject_VectorcallDictPyCFunction_TypePyObject_CallPyCallable_CheckPyErr_SetStringPyExc_SystemErrorPy_LeaveRecursiveCallPy_EnterRecursiveCallPyType_IsSubtypePyExc_Exception_PyDict_GetItem_KnownHashPyErr_ClearPyErr_GivenExceptionMatchesPyList_NewPyImport_GetModulePyObject_GetAttrPyList_AppendPyBool_TypePyLong_TypePyObject_IsTrue_Py_NoneStruct_Py_FalseStruct_Py_TrueStructPyErr_FormatPyExc_NameErrorPyObject_GetOptionalAttrPyErr_WarnExPyOS_snprintfPyErr_OccurredPyTuple_NewPyModuleDef_InitPy_Version_ITM_registerTMCloneTable_ITM_deregisterTMCloneTable__gmon_start__libpython3.14.so.1.0libopenage.so.0libm.so.6libgcc_s.so.1/home/chris/Games/AOEII-Linux-ChatGPT/src/openage/.bin/g++-debug-Oauto-sanitize-none/libopenageW���
 
@@ -719,494 +642,286 @@ y04
                                                                                                                                       �&␦;�';��,;␦�A;�
                                                                                                                                                       <�}C<␦�g$<
 
-<"�7<�u<< ␦�0<!␦B<"␦.�?=3Q"=5�=68=7�F=@Y$=A==4=�*==^:=_F+,�>H
-                                                             �5,c>I
-                                                                   E53?
-                                                                       ␦,W6@
-                                                                            _5��@�TlogB
-                                                                                       ,�␦C#
-                                                                                            x5S�D�r5/W;EQ�+b1EX%�5�+�+KBE[�+�5�5	�#oEU�+�5�5	�+"E��"�5�#u9E��"
-6
-6	�+cEE��5%6
-6�
-  E��5;6
-6
- J6E�
-     UW6W6U	�+XQ#F�=lF�]}+G&
+== Python build launcher ===
+#!/usr/bin/env python3
 
-G&
-  .
-G&
-  G
-G&
-  `
-G&
-  y
-G&
-  �
-G&
-  �
-G'
-  �
-G'
-  �
-G(
-  �
-G(
+"""
+Openage can, and should, be launched via python3 -m openage.
 
-  G)
-    ,
-     G)
-       F
-        G*
-          `
-           G*
+However, for dynamic analysis using LLVM's sanitizer, a self-compiled
+executable is needed.
 
-             G+
-               �
-                G+
-                  �
-                   G,
-                     �
-                      G,
-                        �
-                         G-
+This file is Cythonized with an embedded interpreter, producing ./run,
+which satisifies that requirement.
+"""
 
-                           G-
+if __name__ == '__main__':
+    # This is stupid but without it, Cython/Python cannot find the openage module.
+    import multiprocessing
+    import os
+    import site
+    import sys
+    sys.path.append(os.getcwd())
 
-                             .
-                              4
-                               G.
-                                 N
-                                  G/
-                                    h
-                                     G/
-                                       �
-                                        G0
-                                          �
-                                           G0
-                                             �
-                                              G1
-                                                �
-                                                 G1
-                                                   �
-                                                    	UG2
-G2
-G3&
-G3F
-G4f
-G4�
-G5�
-G5�
-  �   �G6
-      =%G6
-          G7
-            .G7
-               LG8
-                  jG8
-                     �G9
-                        �G9
-                           �G:
-                              �G:
-                                 �G;
-                                   G;
-                                     #G<
-                                        >G<
-                                           ^G?
-                                              ~G?
-                                                 �G?
-                                                    �G@
-                                                       �G@
-                                                          �G@
-                                                             GA
-                                                                GA
-                                                                  ;GA
-                                                                     VGB
-                                                                        qGB
-                                                                           �GB
-                                                                              �GC
-                                                                                 �GC
-                                                                                    �GC
-                                                                                       �GD
-                                                                                          GD
-                                                                                            .GD
-                                                                                               IGE
-                                                                                                  dGE
-                                                                                                     �GE
-                                                                                                        �GF
-                                                                                                           �GF
-                                                                                                              �GF
-                                                                                                                 GG
-                                                                                                                   $GG
-                                                                                                                      DGG
-                                                                                                                         dGH
-                                                                                                                            �GH
-                                                                                                                               �GH
-                                                                                                                                  �GI
-                                                                                                                                     �GI
-                                                                                                                                        GI
-                                                                                                                                          $GJ
-                                                                                                                                             DGJ
-                                                                                                                                                dGJ
-                                                                                                                                                   �GN
-                                                                                                                                                      �GN
-                                                                                                                                                         �GO
-                                                                                                                                                            �GO
-                                                                                                                                                               �GP
-                                                                                                                                                                  GP
-                                                                                                                                                                    +GQ
-                                                                                                                                                                       FGQ
-                                                                                                                                                                          aGR
-                                                                                                                                                                             |GR
-                                                                                                                                                                                �GS
-                                                                                                                                                                                   �GS
-                                                                                                                                                                                      �GT
-                                                                                                                                                                                         �GT
-                                                                                                                                                                                            GU
- $GU
-    ?GV
-       ZGV
-          uGW
-             �GW
-                �GX
-                   �GX
-                      �GY
-                         GY
-                           6GZ
-                              VGZ
-                                 vG[
-                                    �G[
-                                       �G[
-                                          �G[
-                                             G[
-                                               %G\
-                                                  EG\
-                                                     `G]
-                                                        {G]
-                                                           �G^
-                                                              �G^
-                                                                 �G_
-                                                                    �G_
-                                                                       G`
-                                                                         G`
-                                                                           8Ga
-                                                                              SGa
-                                                                                 nGb
-                                                                                    �Gb
-                                                                                       �Gc
-                                                                                          �Gc
-                                                                                             �Gd
-                                                                                                �Gd
-                                                                                                   Ge
-                                                                                                     +Ge
-                                                                                                        FGf
-                                                                                                           aGf
-                                                                                                              �Gg
-                                                                                                                 �Gg
-                                                                                                                    �Gh
-                                                                                                                       �Gh
-                                                                                                                          ␦Gi
-                                                                                                                             !␦Gi
-                                                                                                                                 F␦Gj
-                                                                                                                                     k␦Gj
-                                                                                                                                         �␦Gk
-                                                                                                                                             �␦Gk
-                                                                                                                                                 �␦Gl
-                                                                                                                                                     �␦Gl
-                                                                                                                                                         �␦Gm
-                                                                                                                                                             m
-                                                                                                                                                              7n
-                                                                                                                                                                Wn
-                                                                                                                                                                  ro
-                                                                                                                                                                    �o
-                                                                                                                                                                      ��
-                                                                                                                                                                        ��
-                                                                                                                                                                          ��
-H'
-  ;-H+Y-H.�.H6
-              e,H7
-                  �,H9
+    # This binary embeds the base Python interpreter, which doesn't know about
+    # the virtual environment openage may have been configured with.
+    # Make the packages of the configured interpreter importable:
+    site.addsitedir("/home/chris/Games/AOEII-Linux-ChatGPT/src/openage/.venv/lib/python3.14/site-packages")
 
-H9
-  .
-H9
-  G
-H9
-  `
-H9
-  y
-H9
-  �
-H9
-  �
-H:
-  t-H;
-      �-H<
-          �-H=
-              �-H?
-                  @(H?
-                      2H?
-                         �-HA
-                             �-HC
-                                 .HF
-                                    2.HG
-                                        N.HH
-                                            o.HJ
-                                                �.HK
-                                                    �.HM
-                                                        �.HN
-                                                            �.HO
-                                                                /HP
-                                                                   (/HQ
-                                                                       L/HS
-                                                                           c/HT
-J                                                                              �AI���I��<
-hKM=?:Kl)Sg"Km�(CKn�0p@Ko�<8qKp�O@�>Kq5SH�!Kr�IP5(Ks
-                                                    �HX
-Kt
-!Y= �"K�=L KF	U�KG
-                   �J�= � L�=5-LE��.LFh+"LGU
-                                            -LI�J�= �(M
-                                                      *>o#M
-                                                           �*getM
-�*setM
-      �Y*docM��$M
-                 ��
-                   J6> �
-                        (M�>o#M*��M+	�=M,�<?HM-	U*docM.�)J�> �>?z
-                                                                         �>}�>��(4��4��4G�;|	-��>��>�.H      J? < N6?�Nc�>{%Nd��JB?Y&�O�A�O�[H�$O���GO��< JO��<(�O�5J0a,O��<8�O�RJ@!O��JHRO��OP�@O��JX�-O��O`l%O��Oh+O��Op�
-O��I�fBO��H��O��J��(O�xJ��9O��J��!O��OCO�F���� 
-WK8�	O��J�v.O��<��;O�K�;O�#K��)O��O��7O��O��:O��O�Y<O�.HO��g;O�0KvFO�=K�O��< �O�JK('O��K04"O�
-�HH�O��GP�O�
-*O��GX�@O��G`/9O�
-Ps�G��UT�PsUX� Ps(4\�'Ps�G`�'Ps�GhPs�Gp�!Ps�GxaPs�G�K�a�HO�4�>J	B �>�P�C�Ps[H�<Ps�G�9Ps�G `CPs�G(� PsU0PsU4%PsU8Q(PsU<"PsU@�PsUD�)PsUHd0PsULX
-PsT�{Ps5�&Ps@Ps�S�
-            T��BPs�<��4PsU�
-                           DPs��U
-Ps�0�.J�C �PSD�Q�>�7QT�Q␦W\b#Q�G -Q	U(�<Q
-�,Q
-�-�'Q␦�G05Q�G8`Q$�G@@␦Q&�Q�
-R��G�T>R�F�0*R�F��R��G��-R�5�q?R��{RG�Y6U�HR��G�n=R��G�Y,R��G��R�44�*idR�44����Y��GR�O��<R�O��R�Y�R��G*R�44�R��G!R��G(�R��X0z�{XR��Y�HJ G�_isPS�,�G*bufS
-/S␦   U `4S     $K+S                                                                                                                                    �*objS�*lenS�<�%S�<
-                    �"(S�G0<S�G8M'S�G@S 
-�3HB�:␦6?B�9␦6?R+P�H    �H�G�H�GQ�H     �H�G�H�G�GiR�H	�H�G�H�G�G�G�,SI�GH�HU	IUI�G�T!IH.H�H	&I�<5I�G�UBI��< GI�G[I�G�<e4WhI	mIU�I�G�<�G>Y�I	�IU�I�G�G�G\H[�I	�IU�I�G�G�
-\�I	�IU�I�G�L,]
-J	JU(J�G�I��9`,�"aBJ	GJHRJ�GV1b_J	dJ�GxJ�G�""/c�HWd�J	�JU�J�G�"�G�e�I�f�H�g�J	�J�<�J�G�h�J	�J�GK�G�GUi�HvEj�H�*k�H3␦l�I8m�IW/ndK	iK�G�K.H�G�G�(o�K	�K�G�K.H�<hBr�K	�K�G�K�G�K:�G	�G[�KBB��>�U�jL5/,�45EH.��K\ O=�
-OO�HhSOP�Hp<+OQ�Hx'FOR�H�#S �OG�H(�OH�H0cOI�H8?OJ�HOK
-                           ���+OT�H�V�H��GOW�H�.
-                                                OX�H�>OY�H�OZ�H�mO[�H�[AO\�H��-O]�H�9O^�H�:@O_�H�o
-I�BOn�wOo5I�Op5I�H�)Od�H�%Of�^Oh�HoGOi��Oj$LPOl#�N);Om
-                 Oq
-                   � �Or[I(�Os
-�GO�uO~�iO��N   OLO�G�GO      �0�G[O O�iO:7O��H�8O���O��HDO��(.O�'OO�w@�O{O��GO=O�
-�4>Q�W�>�W�GV9W�G7W�G W�G(Y,W�G0H@W�G8�W��	W�2&N+(4 "@N]~Q�N^5�CN_P&�CUyo&�!U�o&�U�o&�U�o&$U�o�Uc�>�=Ud�<Y2Ue�<t(U��O�<U��O$�-VM�G$�@VX�G$Z*V]�G$�Ve�G$�Vg�G$�+Vp�GHW
-                                                                       ~␦JQ�Q"@N`VQ$ 0X␦?$�
-X␦?$wY␦6?(Z�Q�Z[Hj'�<�9Z
-                        �Q ␦�GRl
-�Q$�[␦6?(`9PR�[H�O�B�<d?$�BL␦6�"L�H8\\ �R��>j#\	�O�\
-�G�\
-    �G �&\
-�G ��GR �K:�R�K(M=mK/$S�?S�GSS�G� P
-                                   �S�P
-�!:P�G�P��PSSP��S�5P    U�P     U�P�␦�S�SFP     �S:eP�S	�S	�S:@	T	�A	�C ]
-?
-~T�o]
+    # multiprocessing can't start worker processes by launching this binary,
+    # so let it launch the configured interpreter instead:
+    multiprocessing.set_executable("/home/chris/Games/AOEII-Linux-ChatGPT/src/openage/.venv/bin/python")
+
+    from openage.__main__ import main
+    main()
+else:
+    print("Running this in the source directory is not supported.",
+          "Please use `make run` or `bin/run.py` to start instead.")
+
+=== Main engine command-line handling ===
+// Copyright 2015-2024 the openage authors. See copying.md for legal info.
+
+#include "main.h"
+
+#include <memory>
+
+#include "cvar/cvar.h"
+#include "engine/engine.h"
+#include "util/timer.h"
+
+namespace openage {
+
+/*
+ * This function is called from Cython, see main_cpp.pyx.
+ *
+ * This is the main entry point to the C++ part.
+ */
+int run_game(const main_arguments &args) {
+	// TODO: store args.gl_debug as default in the cvar system.
+
+	util::Timer timer;
+	timer.start();
+
+	// read and apply the configuration files
+	auto cvar_manager = std::make_shared<cvar::CVarManager>(args.root_path["cfg"]);
+	cvar_manager->load_all();
+
+	// set engine run_mode
+	openage::engine::Engine::mode run_mode = openage::engine::Engine::mode::FULL;
+	if (args.headless) {
+		run_mode = openage::engine::Engine::mode::HEADLESS;
+	}
+
+	// convert window arguments to window settings
+	renderer::window_settings win_settings = {};
+	win_settings.width = args.window_args.width;
+	win_settings.height = args.window_args.height;
+	win_settings.vsync = args.window_args.vsync;
+
+	renderer::window_mode wmode;
+	if (args.window_args.mode == "fullscreen") {
+		wmode = renderer::window_mode::FULLSCREEN;
+	}
+	else if (args.window_args.mode == "borderless") {
+		wmode = renderer::window_mode::BORDERLESS;
+	}
+	else if (args.window_args.mode == "windowed") {
+		wmode = renderer::window_mode::WINDOWED;
+	}
+	else {
+		throw Error(MSG(err) << "Invalid window mode: " << args.window_args.mode);
+	}
+	win_settings.mode = wmode;
+	win_settings.debug = args.gl_debug;
+
+	openage::engine::Engine engine{run_mode, args.root_path, args.mods, win_settings};
+
+	engine.loop();
+
+	return 0;
+}
+
+} // namespace openage
+
+=== Python package entry point ===
+# Copyright 2015-2026 the openage authors. See copying.md for legal info.
+#
+# pylint: disable=too-many-statements
+"""
+Behold: The central entry point for all of openage.
+
+This module mostly does argparsing.
+Subparsers are initialized by their respective modules.
+"""
+
+import argparse
+import multiprocessing
+import os
+import sys
+
+from .log import ENV_VERBOSITY, set_loglevel, verbosity_to_level
 
 
-=== Native build artifacts outside bin ===
-./.bin/g++-debug-Oauto-sanitize-none/openage/game/main_cpp.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/event/demo.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/log/log_cpp.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/gamestate/tests.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/testing/cpp_testing.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/testing/misc_cpp.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/main/tests.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/main/main_cpp.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/cvar/cvar.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/pathfinding/tests.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/versions/versions.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/util/fslike/cpp.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/util/filelike/cpp.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/cython_check.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/convert/service/export/interface/visgrep.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/convert/service/export/opus/opusenc.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/convert/service/export/png/binpack.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/convert/service/export/png/png_create.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/convert/processor/export/texture_merge.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/convert/processor/export/terrain_merge.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/convert/value_object/read/media/smp.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/convert/value_object/read/media/slp.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/convert/value_object/read/media/smx.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/convert/value_object/read/media/sld.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/cabextract/cabchecksum.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/cabextract/lzxd.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/renderer/tests.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/renderer/renderer_cpp.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/cppinterface/exctranslate_tests.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/cppinterface/pyobject.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/cppinterface/setup_checker.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/openage/cppinterface/exctranslate.cpython-314-x86_64-linux-gnu.so
-./.bin/g++-debug-Oauto-sanitize-none/libopenage/libopenage.so.0
-./.bin/g++-debug-Oauto-sanitize-none/CMakeCache.txt
-./.venv/lib/python3.14/site-packages/PIL/_imagingmorph.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/PIL/_imagingft.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/PIL/_imagingmath.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/PIL/_webp.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/PIL/_imagingtk.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/PIL/_avif.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/PIL/_imagingcms.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/PIL/_imaging.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/lz4/block/_block.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/lz4/frame/_frame.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/lz4/_version.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/random/_common.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/random/bit_generator.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/random/_pcg64.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/random/_bounded_integers.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/random/_mt19937.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/random/mtrand.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/random/_sfc64.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/random/_philox.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/random/_generator.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/_core/_multiarray_tests.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/_core/_struct_ufunc_tests.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/_core/_multiarray_umath.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/_core/_rational_tests.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/_core/_umath_tests.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/_core/_simd.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/_core/_operand_flag_tests.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/fft/_pocketfft_umath.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/linalg/lapack_lite.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy/linalg/_umath_linalg.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so
-./.venv/lib/python3.14/site-packages/numpy.libs/libgfortran-83c28eba-468e71e5.so.5.0.0
-./.venv/lib/python3.14/site-packages/numpy.libs/libquadmath-2284e583-a9307bba.so.0.0.0
-./.venv/lib/python3.14/site-packages/Cython/_shared.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/Compiler/FusedNode.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/Compiler/FlowControl.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/Compiler/Parsing.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/Compiler/LineTable.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/Compiler/Code.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/Compiler/StringEncoding.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/Compiler/Visitor.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/Compiler/Scanning.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/StringIOTree.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/Utils.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/Runtime/refnanny.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/Tempita/_tempita.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/LZSS.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/Plex/Actions.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/Plex/Transitions.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/Plex/DFA.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/Plex/Scanners.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/Cython/Plex/Machines.cpython-314-x86_64-linux-gnu.so
-./.venv/lib/python3.14/site-packages/pillow.libs/libwebp-51b0b3f7.so.7.2.0
-./.venv/lib/python3.14/site-packages/pillow.libs/libXau-154567c4.so.6.0.0
-./.venv/lib/python3.14/site-packages/pillow.libs/libjpeg-31e2ca52.so.62.4.0
-./.venv/lib/python3.14/site-packages/pillow.libs/libzstd-44be1190.so.1.5.7
-./.venv/lib/python3.14/site-packages/pillow.libs/liblzma-2be87c3e.so.5.8.3
-./.venv/lib/python3.14/site-packages/pillow.libs/libavif-8a7f9d56.so.16.4.2
-./.venv/lib/python3.14/site-packages/pillow.libs/libbrotlidec-7e5462ba.so.1.2.0
-./.venv/lib/python3.14/site-packages/pillow.libs/libfreetype-9fc94c80.so.6.20.6
-./.venv/lib/python3.14/site-packages/pillow.libs/libharfbuzz-172d1f63.so.0.61421.0
-./.venv/lib/python3.14/site-packages/pillow.libs/libpng16-abb096d5.so.16.58.0
-./.venv/lib/python3.14/site-packages/pillow.libs/libopenjp2-b07f72ad.so.2.5.4
-./.venv/lib/python3.14/site-packages/pillow.libs/libsharpyuv-0066295b.so.0.1.2
-./.venv/lib/python3.14/site-packages/pillow.libs/liblcms2-dade1fbf.so.2.0.19
-./.venv/lib/python3.14/site-packages/pillow.libs/libwebpmux-8fb1c9f6.so.3.1.2
-./.venv/lib/python3.14/site-packages/pillow.libs/libbrotlicommon-53534446.so.1.2.0
-./.venv/lib/python3.14/site-packages/pillow.libs/libtiff-fc87e79d.so.6.2.0
-./.venv/lib/python3.14/site-packages/pillow.libs/libxcb-ad31f5a3.so.1.1.0
-./.venv/lib/python3.14/site-packages/pillow.libs/libwebpdemux-9fe2abcc.so.2.0.17
-./.venv/lib/python3.14/site-packages/markupsafe/_speedups.cpython-314-x86_64-linux-gnu.so
+def print_version():
+    """
+    The default version printer, unfortunately, inserts newlines.
+    This is the easiest way around.
+    """
+    import platform
 
-=== GUI source files ===
-libopenage/engine/engine.cpp
-libopenage/engine/engine.h
-libopenage/event/demo/main.h
-libopenage/event/demo/main.cpp
-libopenage/event/demo/gui.cpp
-libopenage/event/demo/gui.h
-libopenage/main.h
-libopenage/main.cpp
-libopenage/main/demo/pong/gamestate.h
-libopenage/main/demo/pong/aicontroller.h
-libopenage/main/demo/pong/aicontroller.cpp
-libopenage/main/demo/pong/gamestate.cpp
-libopenage/main/demo/pong/gui.cpp
-libopenage/main/demo/pong/pong.h
-libopenage/main/demo/pong/physics.h
-libopenage/main/demo/pong/pong.cpp
-libopenage/main/demo/pong/physics.cpp
-libopenage/main/demo/pong/gui.h
-libopenage/main/demo/presenter/presenter.cpp
-libopenage/main/demo/presenter/presenter.h
-libopenage/main/demo/interactive/interactive.h
-libopenage/main/demo/interactive/interactive.cpp
-libopenage/main/tests.cpp
-libopenage/main/tests.h
-libopenage/presenter/presenter.cpp
-libopenage/presenter/presenter.h
-libopenage/renderer/gui/guisys/link/gui_property_map_impl.h
-libopenage/renderer/gui/guisys/link/gui_property_map_impl.cpp
-libopenage/renderer/gui/guisys/link/gui_singleton_item.cpp
-libopenage/renderer/gui/guisys/link/qtgui_checked_static_cast.h
-libopenage/renderer/gui/guisys/link/gui_item_list_model.h
-libopenage/renderer/gui/guisys/link/gui_list_model.h
-libopenage/renderer/gui/guisys/link/gui_item.h
-libopenage/renderer/gui/guisys/link/gui_singleton_item.h
-libopenage/renderer/gui/guisys/link/gui_item.cpp
-libopenage/renderer/gui/guisys/link/gui_list_model.cpp
-libopenage/renderer/gui/guisys/link/gui_item_link.h
-libopenage/renderer/gui/guisys/private/opengl_debug_logger.h
-libopenage/renderer/gui/guisys/private/gui_rendering_setup_routines.h
-libopenage/renderer/gui/guisys/private/gui_ctx_setup.cpp
-libopenage/renderer/gui/guisys/private/gui_renderer_impl.cpp
-libopenage/renderer/gui/guisys/private/opengl_debug_logger.cpp
-libopenage/renderer/gui/guisys/private/gui_application_impl.h
-libopenage/renderer/gui/guisys/private/gui_engine_impl.cpp
-libopenage/renderer/gui/guisys/private/gui_subtree_impl.h
-libopenage/renderer/gui/guisys/private/gui_input_impl.h
-libopenage/renderer/gui/guisys/private/gui_subtree_impl.cpp
-libopenage/renderer/gui/guisys/private/gui_rendering_setup_routines.cpp
-libopenage/renderer/gui/guisys/private/livereload/recursive_directory_watcher.h
-libopenage/renderer/gui/guisys/private/livereload/recursive_directory_watcher_worker.h
-libopenage/renderer/gui/guisys/private/livereload/recursive_directory_watcher_worker.cpp
-libopenage/renderer/gui/guisys/private/livereload/deferred_initial_constant_property_values.h
-libopenage/renderer/gui/guisys/private/livereload/gui_live_reloader.cpp
-libopenage/renderer/gui/guisys/private/livereload/recursive_directory_watcher.cpp
-libopenage/renderer/gui/guisys/private/livereload/deferred_initial_constant_property_values.cpp
-libopenage/renderer/gui/guisys/private/livereload/gui_live_reloader.h
-libopenage/renderer/gui/guisys/private/gui_engine_impl.h
-libopenage/renderer/gui/guisys/private/gui_renderer_impl.h
-libopenage/renderer/gui/guisys/private/gui_application_impl.cpp
-libopenage/renderer/gui/guisys/private/gui_ctx_setup.h
-libopenage/renderer/gui/guisys/private/gui_input_impl.cpp
-libopenage/renderer/gui/guisys/public/gui_renderer.h
-libopenage/renderer/gui/guisys/public/gui_input.h
-libopenage/renderer/gui/guisys/public/gui_engine.cpp
-libopenage/renderer/gui/guisys/public/gui_application.h
-libopenage/renderer/gui/guisys/public/gui_subtree.h
-libopenage/renderer/gui/guisys/public/gui_engine.h
-libopenage/renderer/gui/guisys/public/gui_renderer.cpp
-libopenage/renderer/gui/guisys/public/gui_input.cpp
-libopenage/renderer/gui/guisys/public/gui_subtree.cpp
-libopenage/renderer/gui/guisys/public/gui_application.cpp
-libopenage/renderer/gui/gui.cpp
-libopenage/renderer/gui/integration/private/gui_log.cpp
-libopenage/renderer/gui/integration/private/gui_standalone_subtexture.h
-libopenage/renderer/gui/integration/private/gui_log.h
-libopenage/renderer/gui/integration/private/gui_texture_handle.h
-libopenage/renderer/gui/integration/private/gui_make_standalone_subtexture.h
-libopenage/renderer/gui/integration/private/gui_standalone_subtexture.cpp
-libopenage/renderer/gui/integration/private/gui_texture.h
-libopenage/renderer/gui/integration/private/gui_texture.cpp
-libopenage/renderer/gui/integration/private/gui_texture_handle.cpp
-libopenage/renderer/gui/integration/private/gui_make_standalone_subtexture.cpp
-libopenage/renderer/gui/integration/private/gui_filled_texture_handles.cpp
-libopenage/renderer/gui/integration/private/gui_filled_texture_handles.h
-libopenage/renderer/gui/integration/public/gui_application_with_logger.cpp
-libopenage/renderer/gui/integration/public/gui_application_with_logger.h
-libopenage/renderer/gui/gui.h
+    from . import LONGVERSION
 
-=== Git status ===
+    print(LONGVERSION)
+
+    print()
+    print("== Platform ==")
+    print(f"System        {platform.system()} {platform.release()}")
+    print(f"Version       {platform.version()}")
+    print(f"Architecture  {platform.machine()}")
+    print(f"Python impl   {platform.python_implementation()} {platform.python_version()}")
+    print(f"Executable    {sys.executable}")
+    print(f"openage path  {os.path.dirname(os.path.realpath(__file__))}")
+    libc_lib, libc_ver = platform.libc_ver()
+    if libc_lib:
+        print(f"libc (probe)  {libc_lib} {libc_ver}")
+
+    print()
+    print("== C++ ==")
+    try:
+        from .versions.versions import get_version_numbers
+    except ImportError:
+        print("(unavailable; openage.versions Cython module not built)")
+    else:
+        version_numbers = get_version_numbers()
+        for key in version_numbers:
+            print(key.decode("utf8") + " " + version_numbers[key].decode("utf8"))
+    sys.exit(0)
+
+
+def add_dll_search_paths(dll_paths: list[str]):
+    """
+    This function adds DLL search paths.
+    """
+    from .util.dll import DllDirectoryManager
+
+    manager = DllDirectoryManager(dll_paths)
+
+    return manager
+
+
+def main(argv=None):
+    """Top-level argparsing; invokes subparser for all submodules."""
+    cli = argparse.ArgumentParser("openage", description=("free age of empires II engine clone"))
+
+    if sys.platform == "win32":
+        from .util.dll import default_paths
+
+        cli.add_argument(
+            "--add-dll-search-path",
+            action="append",
+            dest="dll_paths",
+            # use path of current openage executable as default
+            default=default_paths(),
+            help="(Windows only) provide additional DLL search path",
+        )
+
+    cli.add_argument(
+        "--version", "-V", action="store_true", dest="print_version", help="print version info and exit"
+    )
+
+    # shared arguments for all subcommands
+    global_cli = argparse.ArgumentParser(add_help=False)
+    global_cli.add_argument(
+        "--verbose", "-v", action="count", default=ENV_VERBOSITY, help="increase verbosity"
+    )
+    global_cli.add_argument("--quiet", "-q", action="count", default=0, help="decrease verbosity")
+    global_cli.add_argument(
+        "--trap-exceptions",
+        action="store_true",
+        help=(
+            "upon throwing an exception a debug break is "
+            "triggered. this will crash openage if no "
+            "debugger is present"
+        ),
+    )
+
+    devmodes = global_cli.add_mutually_exclusive_group()
+    devmodes.add_argument("--devmode", action="store_true", help="force-enable development mode")
+    devmodes.add_argument("--no-devmode", action="store_true", help="force-disable development mode")
+
+    # shared directory arguments for most subcommands
+    cfg_cli = argparse.ArgumentParser(add_help=False)
+
+    cfg_cli.add_argument("--asset-dir", help="Use this as an additional asset directory.")
+    cfg_cli.add_argument("--cfg-dir", help="Use this as an additional config directory.")
+
+    subparsers = cli.add_subparsers(dest="subcommand")
+
+    # enable reimports for "init_subparser"
+    # pylint: disable=reimported
+
+    from .main.main import init_subparser
+
+    main_cli = subparsers.add_parser("main", parents=[global_cli, cfg_cli])
+    init_subparser(main_cli)
+
+    from .game.main import init_subparser
+
+    init_subparser(subparsers.add_parser("game", parents=[global_cli, cfg_cli]))
+
+    from .testing.main import init_subparser
+
+    init_subparser(subparsers.add_parser("test", parents=[global_cli, cfg_cli]))
+
+    from .convert.main import init_subparser
+
+    init_subparser(subparsers.add_parser("convert", parents=[global_cli]))
+
+    from .convert.tool.singlefile import init_subparser
+
+    init_subparser(subparsers.add_parser("convert-file", parents=[global_cli]))
+
+    from .convert.tool.api_export import init_subparser
+
+    init_subparser(subparsers.add_parser("convert-export-api", parents=[global_cli]))
+
+    from .codegen.main import init_subparser
+
+    init_subparser(subparsers.add_parser("codegen", parents=[global_cli]))
+
+    args, remaining_args = cli.parse_known_args(argv)
+
+    dll_manager = None
+    if sys.platform == "win32":
+        dll_manager = add_dll_search_paths(args.dll_paths)
+        dll_manager.add_directories()
+
+    if args.print_version:
+        print_version()
+
+    if not args.subcommand:
+        # the user didn't specify a subcommand. default to 'main'.
+        args = main_cli.parse_args(remaining_args)
+
+    args.dll_manager = dll_manager
+
+    # process the shared args
+    set_loglevel(verbosity_to_level(args.verbose - args.quiet))
+
+    try:
+        from . import config
+
+        if args.no_devmode:
+            config.DEVMODE = False
+        if args.devmode:
+            config.DEVMODE = True
+            from . import cython_check
+
+            cython_check.this_is_true()
+    except ImportError:
+        cli.error(
+            "code was not yet generated. "
+            "Did you run the command from the build directory (bin/)?\n"
+            "See doc/building.md for more information."
+        )
+Inspection complete
