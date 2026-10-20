@@ -1,0 +1,1212 @@
+[chris@arch5580 openage]$ cd "$HOME/Games/AOEII-Linux-ChatGPT/src/openage"
+
+printf '\n=== Exact QML module and presenter references ===\n'
+rg -n -i -C 3 \
+  'qmlRegister|yay\.sfttech\.openage|yay\.sfttech\.livereload|openage presenter test|test/qml|main\.qml|set.*qml.*root' \
+  . \
+  --glob '!*.nyan' \
+  --glob '!*.lock' \
+  --glob '!*.json' \
+  --glob '!*.svg' \
+  --glob '!*.png' \
+  --glob '!*.jpg' \
+  --glob '!*.toml' \
+  --glob '!*.git/**' \
+  2>/dev/null | head -260
+
+printf '\n=== Top-level build and launcher layout ===\n'
+ls -la
+printf '\n=== Launcher details ===\n'
+sed -n '1,220p' bin/run
+
+printf '\n=== Native build artifacts outside bin ===\n'
+find . -type f \( \
+  -name '*.so' -o -name '*.so.*' -o \
+  -name 'CMakeCache.txt' -o -name 'build.ninja' \
+  \) -print 2>/dev/null | head -120
+
+printf '\n=== GUI source files ===\n'
+find libopenage -type f \( \
+  -name '*.cpp' -o -name '*.h' -o \
+  -name '*.hpp' -o -name '*.pyx' -o -name '*.py' \
+  \) -print 2>/dev/null |
+  grep -Ei 'gui|present|main|engine' | head -160
+
+printf '\n=== Git status ===\n'
+git status --short
+
+=== Exact QML module and presenter references ===
+
+=== Top-level build and launcher layout ===
+total 288
+drwxr-xr-x 17 chris users  4096 Oct 19 19:08 .
+drwxr-xr-x  3 chris users  4096 Oct 19 17:12 ..
+-rw-r--r--  1 chris users 10704 Oct 19 17:13 AGENTS.md
+drwxr-xr-x  9 chris users  4096 Oct 19 17:44 assets
+drwxr-xr-x  3 chris users  4096 Oct 19 17:23 .bin
+lrwxrwxrwx  1 chris users    34 Oct 19 19:08 bin -> .bin/g++-debug-Oauto-sanitize-none
+drwxr-xr-x  7 chris users  4096 Oct 19 17:23 buildsystem
+drwxr-xr-x  3 chris users  4096 Oct 19 17:13 cfg
+-rw-r--r--  1 chris users   317 Oct 19 17:13 changelog.md
+-rw-r--r--  1 chris users    56 Oct 19 17:13 .clangd
+-rw-r--r--  1 chris users  3850 Oct 19 17:13 .clang-format
+-rw-r--r--  1 chris users  7981 Oct 19 17:13 CMakeLists.txt
+-rwxr-xr-x  1 chris users 14036 Oct 19 17:13 configure
+-rw-r--r--  1 chris users 23851 Oct 19 17:13 copying.md
+drwxr-xr-x  2 chris users  4096 Oct 19 17:13 dist
+drwxr-xr-x 12 chris users  4096 Oct 19 17:13 doc
+drwxr-xr-x  3 chris users  4096 Oct 19 17:13 etc
+-rw-r--r--  1 chris users  1494 Oct 19 17:13 flake.lock
+-rw-r--r--  1 chris users  1526 Oct 19 17:13 flake.nix
+drwxr-xr-x  7 chris users  4096 Oct 19 20:02 .git
+drwxr-xr-x  4 chris users  4096 Oct 19 17:13 .github
+-rw-r--r--  1 chris users   833 Oct 19 17:13 .gitignore
+-rw-r--r--  1 chris users   792 Oct 19 17:13 kevinfile
+drwxr-xr-x  2 chris users  4096 Oct 19 17:13 legal
+drwxr-xr-x 26 chris users  4096 Oct 19 17:13 libopenage
+-rw-r--r--  1 chris users  1625 Oct 19 17:13 .mailmap
+-rw-r--r--  1 chris users  6065 Oct 19 17:13 Makefile
+drwxr-xr-x  2 chris users  4096 Oct 19 17:13 nix
+drwxr-xr-x 19 chris users  4096 Oct 19 18:18 openage
+-rw-r--r--  1 chris users     6 Oct 19 17:13 openage_version
+drwxr-xr-x  3 chris users  4096 Oct 19 17:13 packaging
+-rw-r--r--  1 chris users  2385 Oct 19 17:13 pyproject.toml
+-rw-r--r--  1 chris users 11897 Oct 19 17:13 README.md
+-rwxr-xr-x  1 chris users  1197 Oct 19 17:13 run.py.in
+-rw-r--r--  1 chris users   802 Oct 19 17:13 shell.nix
+-rw-r--r--  1 chris users 94046 Oct 19 17:13 uv.lock
+drwxr-xr-x  4 chris users  4096 Oct 19 17:21 .venv
+
+=== Launcher details ===
+ELF>�&@�	@8
+@*)@@@0pppddXmX}X}�0hmh}h}P���0���DDP�tdTbTbTb��Q�tdR�tdXmX}X}�/lib64/ld-linux-x86-64.so.2 GNU���GNUGNU�in��`��~�Yn�y��x�@{�"��������*9Qbu������2G^o�����!<JWp������GUm����*6_m~����/:M^����".J d � 4P�l����(���`�@�-P���x`�����h��@����`��N���� � �� ?���__libc_start_mainGLIBC_2.34libc.so.6_end_edata__bss_start_ZSt21ios_base_library_initvGLIBCXX_3.4.32libstdc++.so.6__stack_chk_failGLIBC_2.4__cxa_finalizeGLIBC_2.2.5PyMem_RawFreePy_DecodeLocalefreefwritestderrstrdupsetlocalemallocPyErr_PrintPy_FinalizeExPyImport_ImportModulePyConfig_ClearPy_InitializeFromConfigPyConfig_SetArgvPyStatus_ExceptionPyConfig_SetStringPyConfig_InitPythonConfigPyImport_AppendInittabPyModule_NewObjectPyInterpreterState_GetIDPyThreadState_GetPyObject_GetAttrStringPyDict_SetItemPyDict_SetItemStringPyDict_GetItemStringPyImport_GetModuleDictPyObject_SetAttrPyUnicode_FromStringAndSizePyBytes_FromStringAndSizePyObject_SetAttrString__assert_failPyImport_AddModuleRefPyModule_GetDictPyExc_RuntimeErrorPyTraceBack_HerePyFrame_NewPyThreadState_GetUncheckedPyMem_ReallocPyMem_MallocPyException_SetTracebackPyCode_NewEmptyPyUnicode_AsUTF8PyUnicode_FromFormatPyExc_ImportErrorPyUnicode_ConcatPyUnicode_FromStringPyModule_GetNamePyErr_ExceptionMatchesPyExc_AttributeErrorPyImport_ImportModuleLevelObjectPyDict_NewPyObject_HashPyUnicode_InternInPlacePyUnicode_DecodeUTF8PyUnicode_SubstringPyObject_HasAttrWithErrorPyUnicode_FindCharPyObject_VectorcallMethodPyList_TypePyUnicode_EqualPyUnicode_TypePyObject_RichComparePyFloat_Type_Py_DeallocPyObject_VectorcallDictPyCFunction_TypePyObject_CallPyCallable_CheckPyErr_SetStringPyExc_SystemErrorPy_LeaveRecursiveCallPy_EnterRecursiveCallPyType_IsSubtypePyExc_Exception_PyDict_GetItem_KnownHashPyErr_ClearPyErr_GivenExceptionMatchesPyList_NewPyImport_GetModulePyObject_GetAttrPyList_AppendPyBool_TypePyLong_TypePyObject_IsTrue_Py_NoneStruct_Py_FalseStruct_Py_TrueStructPyErr_FormatPyExc_NameErrorPyObject_GetOptionalAttrPyErr_WarnExPyOS_snprintfPyErr_OccurredPyTuple_NewPyModuleDef_InitPy_Version_ITM_registerTMCloneTable_ITM_deregisterTMCloneTable__gmon_start__libpython3.14.so.1.0libopenage.so.0libm.so.6libgcc_s.so.1/home/chris/Games/AOEII-Linux-ChatGPT/src/openage/.bin/g++-debug-Oauto-sanitize-none/libopenageW���
+
+                                                                                                                                                    ιj�WZ]`acdej�qXz)V]Ylĺ�|Ҕ�F�+��BE��8������u␦i��$��lB��]Xp'`�'���Q@X��� �(6K82<���T�U�V�X��Y`�[@�\��^`�_��`h�a��b@�c��d`�e��f �g�h�i�j��R��Q �P(�O0�N8�M@�LH�"P�KX�J`�Ih�Hp�Gx�F��E��D��C��B��A��@��?��>��=Ȁ<Ѐ;؀:��9�8��7��6��4�3�2 �1(�@��/8�.@�-H�,P�+X�*`�)h�(p�'x�&��%��$��#��!�� ��������ȁ␦؁���������� �(�0�8�
+  H�
+    P�
+X�	`h�p�x���H�H�!^H��t��H���5*^�%,^�����%*^h������%"^h������%␦^h������%^h�����%
+^h�����%^h�����%�]h�����%�]h�p����%�]�`����%�]h	�P����%�]h
+�@����%�]h
+          �0����%�]h
+�����%�]h�����%�]h������%�]h������%�]h������%�]h������%�]h�����%�]h�����%�]h�����%z]h�����%r]h�p����%j]h�`����%b]h�P����%Z]h␦�@����%R]h0����%J]h� ����%B]h�����%:]h�����%2]h������%*]h ������%"]h!������%␦]h"������%]h#�����%
+]h$�����%]h%�����%�\h&�����%�\h'�p����%�\h(�`����%�\h)�P����%�\h*�@����%�\h+�0����%�\h,� ����%�\h-�����%�\h.�����%�\h/������%�\h0������%�\h1������%�\h2������%�\h3�����%�\h4�����%�\h5�����%z\h6�����%r\h7�p����%j\h8�`����%b\h9�P����%Z\h:�@����%R\h;�0����%J\h<� ����%B\h=�����%:\h>�����%2\h?������%*\h@������%"\hA������%␦\hB������%\hC�����%
+\hD�����%\hE�����%�[hF�����%�[hG�p����%�[hH�`����%�[hI�P����%�[hJ�@����%�[hK�0����%�[hL� ����%�[hM�����%�[hN�����%�[hO�������1�I��^H��H���PTE1�1�H�=�'��X�f.�H�=I\H�B\H9�tH��XH��t	�����H�=�Z�HX�c�����[]�f.��@ff.����g����øøø�H�GpH�GpH�H�H�H��t/H�H�>�������w�	H�@(H�H��t�������w�	øH9�|�L��L��A������w��AH���݉���A��A��xXIc�H��9|��D9�|Hc�H��9}���D��)�A��A���Hc�H���9�}�H��[]A\�H�(�E=����w����E���H�=v[�����ATUSH��H�xZ�=����w���H��[]A\�I��H��H���]���H��H��t�H�p H��L��������H��(dH�%(H�D$1�H�iZH�DH�UZH�D$H�|��y���H�ZH��u␦�����H�T$dH+%(t
+                                                                                                                                                                       ��������H��(�H�������uP&E��H��'��H�߰�D���H�ܺH�޿�?���H��$�dH+%(t�����H��%딸�ظ��H���[�USH��H��dH�%(H�D1�H��H��H�=�X�����H�,$H��u ����H��uH��H�5�%H�=xY�����H�DdH+%(t�n���H��H��[]�H�H����}���H�-YH��t
+K&�5H�5�%H�=�&����H�wH��USH�H��H�������H�sH���|���H�[]�USH�H��H���t���H��H�C H9���H��H9�����t*��t&�E=����w���EH��H�������H�[]�H��H��������H�H�H���H��t��H��������SH������H��uH������H��t�����[�H�������ATUSI��H��H���Y���H��H��tH�pH��L�������H��[]A\�SH��H������H��H���1�����t
+�8����[�USH�H��H�WH��H�=␦U�%���H��H��t�=����w���H��H�[]��1���H��H��tH�5�Y������t�H���*���H����HH9�tH��������t���H�ð��ð��ATUSH��H�GL��@ uOH�oH�=�$������uBH��H��A��H������H��u����H��uH�5�$H�=H�5�$H�=�!�j���H�H�[]ø��AUATUSH�H��H��I��H�L���M��u����H��H��H�[]A\A]�H�=�#������u8L��H��H��A��H������H��u�����H��u�H�5�#H�=&X����못�AVAUATUSH��I��I��H��I��I��?M����H������t0H�5�W�,�����tSH�C�@tI�H���;���[]A\A]A^�I���
+                            �t(H�5�W�������tH�C�tI�4$H��������H��uH���d���H��t�L��L��H�����M��uH��H�5�RH�������H��L��L��H��������q���USH�H��t'H���4����ŋ��x�ʉH��������H�[]ý������H�H��SH9�uH9�u+�H��H�H��XH9�tH�SH9�uH9�tպ�k���H���u�����H��YH9�u�H9�t�H�)SH9�t��O�����t���H��(dH�%(H�D$1�H�Y[H9u#�(�����xf�H�T$dH+%(t_����H�|H�t$H�t�H��H�=�Q�����H��H��t!���x�ȉt������������똸�����H��(�AVAUATUSH��I��I��I��H��dH�%(H�D1�H��������Í@��w!H�EH�DdH+%(�-�����M����A�H����������.L���;���H��H���ukH�$H�E�OK�t�H�<$�*����Ã������u"H�<$���x
+                                                                                                                                             �ȉu����H�E�j���I��M9�|�H�$H�E��P���A���H���t\�L�������I��H��tGH�<$���x
+                      �ȉu�W���H��L���������A�$���������A�$�����L���*��������H�<$���x
+���x���t�H������H��AUATUSH��dH�%(H�D$x1��D$������D$�D$�����B�D$�D$�����T�D$�D$ ������D$ �D$$�����7�D$$�D$(�����6�D$(�D$,�����D$,�D$0�����
+�D$0�D$4�����D$4�D$8�����
+                         �D$8�D$<�����D$<�D$@�����
+�D$@�D$D������D$D�D$H������D$H�D$L������D$L�D$P������D$P�D$T������D$T�D$X������D$X�D$\������D$\�D$`������D$`�D$d������D$d�D$h������D$h�D$l�����
+�D$l�D$p������D$p�D$t������D$tL�g8�A���~7��F����H�����H�T$xdH+%(������Hc�@�l���H�=& L�H���V���H�DH��t��~
+H�|�M���H�DH��u������������Hc�I��I����]���I�<��(���H���t�H���Z���H�Ĉ[]A\A]�AWAVAUATUSH��I��H��I��H��M��E��dH�%(H�D1�H�$H��uL��H��L��H��������uH�$H�TdH+%(t�������tk����H��H��tYH��tL��H�������H��H��t+A���uA�H�<$uE��H��H��L��L���o���H�$H�������H������H�$�H�����q���H��[]A\A]A^A_�AVAUATUSH��I������H��H����H�=QW������tv�����H�����H��H����H������H��H��t~H�5�KH������I��H��toL��H�������I��H��t
+����y���H��uH���m������D��H��H���b���H��H���H���H��[]A\�AUATUSH�I��I��H��H��H��t*H��tH;t$H����ATUSH��A��H�ͅ�t>��H�H��H�=��y���H��H��t
+  H�5n�=�����H��tH9k(t
+                      H��H������I�}pI�]p�����L�������H�������H�[]A\A]�AWAVAUATUSH�H���tGH��A��I��H��uH�����H��t*H��E@�ED�L� A�$=����w��A�$H�[]A\A]A^A_�D�?��D��H���;���A��A9�~9H�H��H�D9u*H�8L� A�$=����w��A�$���x��ȉu������렋EA9�u'D�x@Ic�H��H���$���H��H���y���H�D�}�ED9�3Mc�I��L�D�L�#�E���EA�$=�����A�����A�$�6����H�Hc�H��H�H��H�4H�H�4H����H�H���H�=�I����H��AWAVAUATUSH��(I����A��I��dH�%(H�D$1��w���I�Ņ�t�D�������H��H����H�L$H�TH��L���s���L��D���L���.���H��H��uEH�<$�����H�|�����H�|$����H��H������H������H�D$dH+%(t]�%���H�L$H�TH�4$L���@�����t9����H�������H��GH��L������H�Z����=����w���H�=.H�1���H��H�GH����A_�A�=����w���H�=␦����H��H��FH����M�H�=�����H��H��FH����	H��FH�5�H�=�G��������&	����H�ƺ���������	�����H��H�vFH���f	�H�=�����H��H�ZFH���a�H�=z����H��H�>FH���\	H�=F��������g	�=�������M��M��L��L���D$
+                                                                A�H���k���H���c���L���[���L���S���L���K���H�=�F��
+��T$                                                                                                             H�=�Et!E��tH�
+    �H�=�����H�=�FH����H�nF������ȉ�z������p�=�Dt"H��EH�5�EH�=2F�������!�������H��H���H�57H���}���H��H��uH��EH�5H���o������H�=�D������yM��M��L��L���D$
+                                                                                                                                                     A������H�=�D�h�����x�H�=�D������x�������x�H�=�D�2���H��H����H�5�DH���.����Ņ�����x�ʉH���������mA�L�D���H�=�D�	���H��H����H��H�5�DH�=�C�����������x�ȉH���G���A�L��C���H�=\D����H��H����H��H�5ADH�=rC�����������x�ȉH�������A�L�DC���H�=D�=���H��H����H��H�5DH�=
+                          C�����������x�ȉH���{���A�L��B���H�=�C�����H��H���nH��H�5�CH�=�B�Q������o���x�ȉH������H�=vC�H���H��H���_H�56CH���z���H��H���c���x�ȉH�������H�=�B����I��H���SH�5�BH���3���I��H���TA���x��A�L������H�D$H�D$ H�t$ �H��L������H�ÿ�[���A�E��x��A�EL���2���H��uI��I��I���D$
+                                                                                                 A�����H��H�������������E��x�ȉEH����������x�ȉH�������H�=,B����I��H����H�5�AH���8���H��H����A�E��x��A�EL������H�D$H�0AH�D$ H�t$ �H��H������H�ſ�[������x�ȉH���6���H��uI��I��I��H���D$
+                                                                                      A������E��x�ȉEH�������H�=A�/���H��H���
+H�5-AH���a���H��H����E��x�ȉEH������H�D$H�S@H�D$ H�t$ �H��H�������H�ſ�������x�ȉH���a���H��uI��I��I��H���D$
+                                                                                                         A�������E��x�ȉEH���'���H�@@H�D$H�t$A�L�y?��H�=(@�w���H��H��uI��I��I��H���D$
+                                                                                                                                                                                    A��j���H�-�?H��H���3���I��H��tuH��H��H�=?�������x_A�E��x��A�EL���������x�ȉH���p���H�=�?����H��H��u8I��I��I��H���D$
+                                                                                                         A������M��L���D$
+                                                                                                                         A������H�D$H�D$ H�t$ �H��H���6���H�ſ��������x�ȉH�������H��uI��I��I��H���D$
+      A��O����E��x�ȉEH�������6���H��H���
+H��H�5x>H�=�=�������
+                    ���x�ȉH���X���H�=�>�5��m����H�5�=H�=�>�����H��H���}����w����ȉ�m���H�������`���M��M��L��L���D$
+                                                                                                                 A��z���I��I��I��H���D$
+                                                                                                                                       A��[���I��I��I��H���D$
+                                                                                                                                                             A��<���I��I��I��H���D$
+                                                                                                                                                                                   A�����I��I��I��H���D$
+           A������I��I��I��H���D$
+                                 A������I��I��I��H���D$
+                                                       A������M��M��L��L���D$
+                                                                             A�����I��I��I��H���D$
+                                                                                                  A�����I��I��I��H���D$
+                                                                                                                       A��c���I��I��I��H���D$
+A��D���M��M��L���D$
+A��(���I��I��I��H���D$
+                      A��	���M��M��L���D$
+                                               A������I��I��I��H���D$
+                                                                     A������M��M��L���D$
+                                                                                        A�����I��I��I��H���D$
+                                                                                                             A�����M��M��L���D$
+                                                                                                                               A��w���I��I��I��H���D$
+                                                                                                                                                     A��X���M��M��L���D$
+                                                                                                                                                                        A��<���I��I��I��H���D$
+ A�����I��I��I���D$
+                   A�����I��I��H���D$
+                                     A������I��H���D$
+                                                     A������M��M���D$
+                                                                     A�����I��I��H��H���D$
+                                                                                          A�����I��I��H���D$
+                                                                                                            A��x���I��I��I��H���D$
+                                                                                                                                  A��Y���I��I��I���D$
+                                                                                                                                                     A��=���I��I��I��H���D$
+                                                                                                                                                                           !A�����I��I��I��H���D$
+    A������M��M��L���D$
+                       A�����������H�������H�5�H�=9E������������B���������8���H��8[]A\A]A^A_�AUATUSH�I��H��I��D������H��tHH�Ņ�u
+��H�[]A\A]�H��������H�=}D�H�����t                                                                                              H��:H9�tH��L��L��������ËE��x�ȉEt
+                                 �������ϸ������H�����H�x����H���u
+�����H��H��7H���uH�{7���H9�t�H�5�
+H�H��L����������O�������������AVSH��A��H��dH�%(H��1�H�52���H�=X��������H�|$@����Ǆ$�E����H��������H��H�t$@H��$`H���u
+                                                                                                                �����H�4$H�|H�t$ H�|$(H�D$H�T$H�D$0H�T$8H�� H�4$H�|H�D$H�T$����H�� ����H��Ic�H�t$@H������H�
+              $H�\H�L$ H�\$(H�D$H�T$H�D$0H�T$8H�� H�
+                                                    $H�\H�D$H�T$�S���H�� ����H��H�t$@�Z���H�
+                                                                                            $H�\H�L$ H�\$(H�D$H�T$H�D$0H�T$8H�� H�
+���I��H��t_L���.��������y.��'H�|$@������H�|$@������                                                                               $H�\H�D$H�T$�������H�� ��uXH�|$@�����i5H�=��
+H�|$@�����H��dH+%(u��H��[A^��q���H��t��������P���H�d$���u��������D$�D$H�d$X�H�\$(L�d$8L�l$@L�t$HL�|$PA��I��Hc�H��H���l���I��H�DH���\���I�ž��Z���H���b���H��H�D$M����M����u*H��t%H�l$0H�5�����@��H�=bH�
+      ����H�|����L������H�|$�����D$H�\$(L�d$8L�l$@L�t$HL�|$P�������D9�}5Hc�H��H�DL�4I�<������I�I�DH��u��D$��H�\$H�޿�b���H�������|$t��#H�tD���H����D$��Hc�I�|��|�����D9�|�H�|�J���L���B���H�\$(H�l$0L�d$8L�l$@L�t$HL�|$P�;�����H�H�����
+�������was newer thandoes not matchrunname '%U' is not definedPy_ssize_t Py_SIZE(PyObject*)Py_TYPE(ob) != &PyLong_TypePy_TYPE(ob) != &PyBool_TypePyList_Check(op)0 <= indexindex < list->allocatedPyCallable_Check(callable)offset > 0cannot import name %S%s (%s:%d)builtinscython_runtime__builtins__run.pyinit runname__loader__loader__file__origin__package__parent__path__submodule_search_locationsout of memory\ncompile time Python version %d.%d of module '%.100s' %s runtime version %d.%d/usr/include/python3.14/object.hvoid PyList_SET_ITEM(PyObject*, Py_ssize_t, PyObject*)/usr/include/python3.14/cpython/listobject.hvoid Py_SET_SIZE(PyVarObject*, Py_ssize_t)Py_TYPE(_PyObject_CAST(ob)) != &PyLong_TypePy_TYPE(_PyObject_CAST(ob)) != &PyBool_Type while calling a Python objectNULL result without error in PyObject_CallPyObject* (* __Pyx_PyVectorcall_Function(PyObject*))(PyObject*, PyObject* const*, size_t, PyObject*)/home/chris/Games/AOEII-Linux-ChatGPT/src/openage/.bin/g++-debug-Oauto-sanitize-none/run.cppvoid __Pyx_ErrRestoreInState(PyThreadState*, PyObject*, PyObject*, PyObject*)type == NULL || (value != NULL && type == (PyObject*) Py_TYPE(value))Module 'run' has already been imported. Re-initialisation is not supported.Interpreter change detected - this module can only be loaded into one interpreter per process../home/chris/Games/AOEII-Linux-ChatGPT/src/openage/.venv/bin/python/home/chris/Games/AOEII-Linux-ChatGPT/src/openage/.venv/lib/python3.14/site-packages?Please use `make run` or `bin/run.py` to start instead.Running this in the source directory is not supported.__main____module____name____qualname____test__addsitedirappendcline_in_tracebackgetcwdmainmultiprocessingopenage.__main__ospathprintset_executablesetdefaultsitesys
+Openage can, and should, be launched via python3 -m openage.
+
+However, for dynamic analysis using LLVM's sanitizer, a self-compiled
+executable is needed.
+
+This file is Cythonized with an embedded interpreter, producing ./run,
+which satisifies that requirement.
+zRx
+  h���&D4I���L7���d%���|�������R�;���(�K���p�����
+�����D,
+       ����WB�A�A �{
+AA
+  <����,T����LB�A�A �]
+AA
+  �����mD0�!���*D4�3����A�G�m�A�A�A�d�H$�����sA�A�D0jA,���-Da
+A
+ 49���F{Lg���gDd�����D|'���gD$�v���$A�A�D [A,�r���bA�A�D L
+AA
+  �����"DV
+A
+
+ ����7A�d
+A
+ ,,����1B�A�A �iA\����)A�,|����eA�A�D r
+AA
+  �����*MG,����rB�A�A �\
+AA
+  ,�H���xA�A�D h
+AA
+  <,�����B�B�A �A(�D0h
+(A ABA
+      <l�����B�B�B �A(�A0�L
+(A BBA
+      ,�z���9A�A�D i
+AA
+  ������DZ
+A
+ ������D0Do����B�B�B �A(�A0�D@}0A(A BB\����!W<t����RB�B�A �A(�G�>(A ABD������B�B�B �B(�A0�A8�DP�8A0A(B BB<������B�B�B �A(�A0��
+(A BBA
+      ,<$���uB�A�A �mA4li����B�B�A �A(�D0r(A ABL�����MB�B�B �B(�A0�A8�D@S
+8A0A(B BBA
+          �����␦DL
+                  ����'B�B�B �B(�A0�A8�D`8A0A(B BBL\����"B�B�B �B(�A0�A8�Dp	8A0A(B BB<�\����B�B�A �A(�D0M
+(A ABA
+      �����WD]
+A
+ <
+ ����CB�B�A �A(�D0w
+(A ABA
+      D����'B�A�G���\�F�\�@�^��
+AA
+  L�����E``
+A
+ Y�����m�T�F�E�E�E�E�E��������E�E�E�E�E�$����FJ
+                                               �?␦;*3$"����6l�������|���
+                                                                        ���u���$���{���<�������T�������l��������������������������w���������������������������,�������D���H���t�����������������L���.���d�����������u�������X���,�������\���P���������������������������L��������������������������%���<���L�������p'�'��␦������o���<���\����������W���������������{������
+
+���o@��l��
+�P␦X`������o����o����oh}�!�!�!""&"6"F"V"f"v"�"�"�"�"�"�"�"�"##&#6#F#V#f#v#�#�#�#�#�#�#�#�#$$&$6$F$V$f$v$�$�$�$�$�$�$�$�$%%&%6%F%V%f%v%�%�%�%�%�%�%�%�%&&&&6&F&V&f&v&�&�&�&�&�&�����������Q@X�O2���-k�%�Rl�mstdV16.2.1 20260810�i�E!U�'����.Fj ��	~OK�
+                  N�X␦F>�
+>AT
+�nGF	i
+1oGF  q6��P���5"(�P�)��3:@�Q��
+ �W]�Q�=��1�t��9GF��:���9GF��5����9GF�'����9GF�E	����R"����R"���)4��9�%��GM�9m��6`k��p�	�%t#N���q�*	�*����	]�rm	 {�	B␦�s3	���S��$
+                                                                                                                                                       \�	-␦�
+B
+ �
+�
+ P
+�
+ �
+�
+ �
+�
+ �
+�
+  
+�
+ , 
+�
+ M 
+�
+ i 
+�
+ � 
+�
+ � 
+�
+ � 
+�
+ � 
+�
+ � 
+�
+ !
+�
+ 3!
+�
+ ^!
+�
+ z!
+�
+ �!
+�
+ �!
+�
+ �!
+�
+ �!
+�
+ "
+�
+ ;"
+�
+ a"
+�
+ �"
+�
+ �"
+�
+ �"
+�
+ �"
+�
+ #
+�
+ #
+�
+ 9#
+�
+ T#
+�
+ o#
+�
+ <$
+�
+ S$
+�
+ s$
+�
+ �$
+�
+ �$
+�
+ �$
+�
+ �$
+�
+ !%
+�
+ D%
+�
+ e%
+�
+ �%
+�
+ �%
+�
+ �%
+�
+ �%
+�
+ &
+�
+ (&
+�
+ I&
+�
+ j&
+�
+ �&
+�
+ �&
+�
+ �&
+�
+ �&
+�
+ �&
+�
+ ␦'
+�
+ 9'
+�
+ X'
+�
+ w'
+�
+ �'
+�
+ �'
+�(
+�(
+�(
+!%
+ "
+#a"
+&�"
+*�(
++�(
+,�(,�␦
+�3]   �
+   �t9
+      �3�;
+          h>�
+
+>6:
+�ugy3a<6
+F9�7u1}�>�(X
+    )8
+      I*9
+3�8      d*3�2
+   �
+    e,�
+       �,�
+          ;-�
+             Y-�
+                t-�
+                   �-�
+                      �-�
+                         �-�
+                            �-�
+                               �-�
+                                  .�
+                                    2.�
+                                       N.�
+                                          o.�
+                                             �.�
+                                                �.�
+                                                   �.�
+                                                      �.�
+                                                         �.�
+                                                            /�
+                                                              (/�
+                                                                 L/�
+                                                                    c/�
+                                                                       �/��,@(�/�/��/	60d
+                                                                                           �e
+                                                                                             �0g
+                                                                                                �0h
+                                                                                                   �0i
+                                                                                                      1j
+                                                                                                        ,1k
+                                                                                                           C1l
+                                                                                                              Y1m
+                                                                                                                 p1n
+                                                                                                                    �1o
+                                                                                                                       �1s
+                                                                                                                          �1t
+                                                                                                                             �1v
+                                                                                                                                2w
+                                                                                                                                  62x
+                                                                                                                                     W2z
+                                                                                                                                        n2{
+                                                                                                                                           �2�
+                                                                                                                                              �2�
+                                                                                                                                                 �2�
+                                                                                                                                                    �2�
+                                                                                                                                                       �2�
+                                                                                                                                                          �2�
+                                                                                                                                                             �2�
+                                                                                                                                                                #3�
+                                                                                                                                                                   /3�
+                                                                                                                                                                      E3F?FyAB
+                                                                                                                                                                              �TpmrA8U_V2TT
+                                                                                                                                                                                           m3U
+ a3V
+    P^
+      ~3g
+         �3j
+            �3k
+               �3a^(b�3cq(dw(e}(5
+                                 �,6
+                                    �,7
+                                       �,8
+                                          	-:
+                                                  �4;
+                                                     �4<
+                                                        �4=
+                                                           �4?
+                                                              @4@
+                                                                 L4A
+                                                                    X4B
+                                                                       d4D
+
+                                                                          5E
+                                                                            4G
+                                                                              4H
+                                                                                4I
+                                                                                  (4J
+                                                                                     44L
+                                                                                        �4M
+                                                                                           �4N
+                                                                                              �4O
+                                                                                                 �4Q
+                                                                                                    p4R
+                                                                                                       |4S
+                                                                                                          �4T
+                                                                                                             �4V
+                                                                                                                5W
+                                                                                                                  59
+                                                                                                                    D␦>
+                                                                                                                       �+␦?
+                                                                                                                           �+␦@
+                                                                                                                               �#␦B
+                                                                                                                                   �5␦C
+                                                                                                                                       �5␦D
+                                                                                                                                           �5␦E
+                                                                                                                                               �5␦F
+                                                                                                                                                   �5␦G
+                                                                                                                                                       �5␦H
+                                                                                                                                                           6␦I
+                                                                                                                                                              %6␦Q
+                                                                                                                                                                  �+␦R
+                                                                                                                                                                      ;6,*>�
+3     v_V2w�    x�:qi�  F;                                                                                                                                                  �	�␦�,u4
+,?
+m6-
+  a6(abs�
+1!,.
+!,(abs[>1�G
+�(absU�0�`
+�(absQ1=%y
+=%(absM�0%�
+%(absCk1~�
+~(abs>413�
+3e!h�H��
+�e!d�H=%�
+=%FB{?�
+       �FBw=%,
+              =%@��&�F
+                      �@��7=%`
+                              =%'��
+                                   ��'�y=%�
+                                           =%=%(cos��B��
+                                                        �(cos��B=%�
+                                                                   =%)sin��@��
+                                                                              �)sin�lF=%
+                                                                                        =%)tan��/�
+                                                                                                  )tan��/=%4
+                                                                                                            =%N:�g+�N
+                                                                                                                     �N:�r+=%h
+                                                                                                                              =%I
+�z��
+    �I
+��=%�
+     =%1>��2��
+              �1>��2=%�
+                       =%(exp�2��
+=%�w�>���7�s�D=%.=%�7)pow���L��)pow�=%j=%=%CG�=)���CG�1=%�=%�%��A����%��A=%�=%�!������!��==%C"
+                                                                                              �6�#�C�6=%>=%3=�(�^��3=)=%~=%=% ^�(U�� Y�(U�% T�(U�=%u�7N��qa
+                                                                                                                                                           N%mw
+�                                                                                                                                                              N =%�
+�N;��
+
+�DNq=%�!�fN���!�ZN�%�!�rN�=%�+�N���+�N�%�+�N=%l�P
+                                                 N.�l�B
+                                                       NI%l�^
+                                                             Nd=%���N�����N�%%���␦N�=%=%��N����4fN%%�4�␦N$=%=%MA"U%ND��MA%$Nd%%MA␦�&N�=%=%�'< N����'8q>N�%%�'4l:N�=%=%_V�N��_RJN$%%_N�(ND=%=%kp�
+   Nd��kl�+N�%%khb.N�=%=%v,����v,␦=%�=%�0�����0�=%=%GX@�+�Gd@=%F=%�a�Q =%|=%#	�;����#
+	�<=%�=%=%)erf	IE���)erf	SE=%�=%�0*	��	��0&	�=%$=%�<	�?��8	=%Z=%>N	�6�u�>J	�6=%�=%_?`	,5����_?\	4=%�=%=%)fmaj	l2�����)fmaf	�;=%=%=%=%+tx7�6��+p	�8=%V=%=%␦6~	}-�v��␦6z	�.=%�=%=%
+                                                 "�S�����
+                                                         "��%�%%%
+                                                                 "��%=%=%=%=%
+                                                                             "�	o�%��
+                                                                                     "�	)A=%E=%=%��	�)U`���	�U{=%�<�	a����<�	n=%�=%��	�~����	�~�=%�;�	v"~��;�	�"~=%R�	�)�8�R�	�)=%S=%=9�	��n�=9�	�=%�=%
+:
+�
+ ���
+:�	�
+       =%�=%".
+j!3��".
+�3�=%�@$
+�3��@ 
+
+3+=%A*6
+��F�A*2
+�=%a=%�$H
+&E�����$D
+.F=%�=%=%�9R
+�.�����9N
+00=%�=%�=-d
+.3�␦��=-`
+�4=%!␦=%=%oEn
+<,�F␦��o7oEj
+M=%k␦=%=%o7�.x
+�	��␦��.t
+�	=%�␦=%^0�
+��␦�^0�
+'==%�␦=%n"�
+	��␦�3n"�
+
+=%%3N
+�
+H1�7UN
+�
+3=%W%U�-�
+�r�-�
+=%�%�8�
+����8�
+%
+%%%�4=%2=%=%=%ydiv���,33Azint�s&␦F�=��&�F�/�!��00Dc%{   �	�	�|4�4�V�4�	�(}��␦F~O& DA�$oA�$oAAA��!+�"#��#�G*#oG>#
+�␦#UF:#i␦��F�/�,#�'$��8%� x2�&�e&5UC?&8	��1&9	�"'(&:	�"�)&;	�" &<	�"(
+&=	�"0�&>	�"8z(&?	�"@/	�"H?&C	�"PU7&D	�"X7&F�0`�&H�0h�E&JUp�-B&KU��@&�0w6A&N
+@&a�0��<&b�&`�0���Z&c�0��)&dU��&fU��E&h�*��+v'� ��                                    R+x�-&Qh�MG&R���&�0�q&U�0�=(&]
+                                                  u!pP�U
+                                                        !�P��	�
+                                                                 �   U�	� 
+                                                                          !�P, ��
+                                                                                 L!�
+                                                                                    UH H �	�
+                                                                                                 �!�
+                                                                                                    Ui �U
+                                                                                                         �
+                                                                                                          U� �H 1U!4
+                                                                                                                    �U� �H 1
+                                                                                                                            �!�P� �W85!�P
+                                                                                                                                         �!{:� �:� 	�
+                                                                                                                                                         �=!Z:! �:� 
+                                                                                                                                                                    �%!V
+                                                                                                                                                                        U.!.!	�
+                                                                                                                                                                                 �$!�:Y! Y!:� 	�
+       !(!�Pz!��
+                !�P�!�
+                      	'!�
+                           U�! :H 1�"!;
+                                       qU�!H H 1
+                                                C!�P�!P�
+                                                        !
+                                                         U"�H "	�!�
+U;"�H "
+       �!!
+          Ua" :H "}*!�
+                      �U�"H H "
+                               B+!
+      !�                          U�"H "
+        �GU�"H "
+                .:!_:�"�"�� 	��!} # H �$!�
+                                             U#H H mA!�
+                                                       U9#H H �'!f T# H "<!�:o#H H 
+                                                                                   d!,:�# :H �#	7$�tm87$9(	U�#(
+Ue3(
+    �5(
+       U
+U�+(U�'(U�%(UZ(U �>(
+                    3(+(�0�#
+                            O!
+                              :S$H �>!� s$ H :c!�
+                                                 U�$H H :�!k �$ H :
+                                                                   H)!�:�$�"�$:� 	H �!�:�$H H 
+!�%%H '8                                                                                            �
+!�=%=%H %t       �
+�/3�%H %U;G!␦�%F�%H %U
+!�:�% H :
+         �U�%P
+              :!4
+                 U&H H :
+                        �=!8 (& H :
+                                   �!= I& H :
+                                             !A j& �:
+                                                     �#!�
+                                                         U�&H 1�+!8
+                                                                   �'U�&H 1!�H �&H �!� �& �N␦!�N␦H �&H H N␦!�N␦ ␦' H �A!��AH 9'H ��A!��A X' ��
+                                                                                                                                              !��
+                                                                                                                                                 H w'H H �
+                                                                                                                                                          !��
+                                                                                                                                                              �' H �2!'�2H �'H �:�2!%�2 �' �:��{
+   �(
+�
+ �(
+
+�(
+
+�(�
+   �,�
+      �/�
+         �/�
+            �/�
+               �/�
+                  �
+                   60(div�C�,^(~~�GDor�(5�5'?5K7^(�b7r:(?3�(
+                                                            0!���(H %�!-~�(H %U�!␦�{)H %U D`)I*~)7	�"�
+                                                                                                           )8	�h)>	�")D	�"@)E	�" �,)F	�"(�,)G	�"0�$)H	�"8t;)I	�"@3)J	�"H�
+                                                                                                                                                                                    )�P� )�Q^2)�RS.)�S�C)�Tq0)�U�A)�V�()�WG)�X)�Y�)�Z0?)�[8=)�\�5)�])z�"d*U�/D)}p*	�D*%|*&*'␦,*(�9*)U��9**�*,�*�*4u�+*5��9*6��*7��*
+*�*�3:�D!*;�}1*H�
+    >**r*�␦N@* 
+*�!a*�S+
+v+�+ !!,
+       �+H=,
+            v+wB,L>-j+␦��+FH,�	�+,�.'
+                                      !,�:�/@�0�/@�;e,.␦/A	U*rem/B	</C=,/HI"�,.␦/I3*rem/=!/Kq,/R��,.␦/S~*rem/�/U�90l��#1u8&1��1␦�$71*�=/�"-	'-U;-��
+                                                                                                                                                               /�
+                                                                                                                                                                 UR-R-	W-�*</�*<Ut-R-*,2%�-�
+                                                                                                                                                                                            F/�U�-�
+      Z/�3�-�|43��-��::-�div/e,�-UU
+                                   @/".�
+
+                                        8/�,2.33
+                                                �/H
+                                                   UN.�:
+                                                        �(/S:o. �:
+                                                                  �+/K
++/AW                                                                  U�. �:7�9/��.�::-�9/
+   U7u$/C�.oo-/z%�.��.	�"�-/��
+3(/��.U /�␦/FL/��.U
+                   �B/�
+                       Uc/�
+                           �!/W:�/�"H :
+                                       �
+/O
+  U�/�"�
+        �,�/~~
+              �3/�~�/��/��
+                          ~�/��.UlD/��*{��.Uv-/�=%60��.�/��Q0��. R)4
+y04
+
+^"4Q0�D&-:\+	�0	�␦��0F	�0:^'	�0:�	�0	��5Yy0�0	�$0#5��077#5V�0�0p 5�
+                                                                                             U1�0
+5X
+  U,1�0
+       P/5Z
+           UC1�0�5�
+                   UY1�0
+                        	%5F
+                                   Up1�0
+                                         +57
+                                            U�1�0�1	�0
+                                                          �%5��"�1�"U�0
+                                                                       �>5�0�1��
+                                                                                �
+                                                                                 5�:�1�::�0
+5�02���0                                                                                   �
+        45
+          U62�03U
+                 �65=
+                     UR2�0R2	�0
+                                  �5
+                                    3n2�0
+                                         �+5G
+5�                                           U�2�0/`B6/U7�␦5h�2�c
+  U�2��
+       5�
+         U�2��7@5�2�07�5U�2�0�"
+                               �;5Z
+                                   U#3�0�"U:/i5��0U!5��"E3�"
+                                                            �#5�
+                                                                Ua3U��/7�A80␦y3	�*�F7�
+                                                                                      U�3Pa3*87P�3Pm384m3�3�p
+                                                                                                             7�a3�3�X�(,�79
+                                                                                                                           4�{9
+                                                                                                                               Uv19|,:
+                                                                                                                                      �&␦;�';��,;␦�A;�
+                                                                                                                                                      <�}C<␦�g$<
+
+<"�7<�u<< ␦�0<!␦B<"␦.�?=3Q"=5�=68=7�F=@Y$=A==4=�*==^:=_F+,�>H
+                                                             �5,c>I
+                                                                   E53?
+                                                                       ␦,W6@
+                                                                            _5��@�TlogB
+                                                                                       ,�␦C#
+                                                                                            x5S�D�r5/W;EQ�+b1EX%�5�+�+KBE[�+�5�5	�#oEU�+�5�5	�+"E��"�5�#u9E��"
+6
+6	�+cEE��5%6
+6�
+  E��5;6
+6
+ J6E�
+     UW6W6U	�+XQ#F�=lF�]}+G&
+
+G&
+  .
+G&
+  G
+G&
+  `
+G&
+  y
+G&
+  �
+G&
+  �
+G'
+  �
+G'
+  �
+G(
+  �
+G(
+
+  G)
+    ,
+     G)
+       F
+        G*
+          `
+           G*
+
+             G+
+               �
+                G+
+                  �
+                   G,
+                     �
+                      G,
+                        �
+                         G-
+
+                           G-
+
+                             .
+                              4
+                               G.
+                                 N
+                                  G/
+                                    h
+                                     G/
+                                       �
+                                        G0
+                                          �
+                                           G0
+                                             �
+                                              G1
+                                                �
+                                                 G1
+                                                   �
+                                                    	UG2
+G2
+G3&
+G3F
+G4f
+G4�
+G5�
+G5�
+  �   �G6
+      =%G6
+          G7
+            .G7
+               LG8
+                  jG8
+                     �G9
+                        �G9
+                           �G:
+                              �G:
+                                 �G;
+                                   G;
+                                     #G<
+                                        >G<
+                                           ^G?
+                                              ~G?
+                                                 �G?
+                                                    �G@
+                                                       �G@
+                                                          �G@
+                                                             GA
+                                                                GA
+                                                                  ;GA
+                                                                     VGB
+                                                                        qGB
+                                                                           �GB
+                                                                              �GC
+                                                                                 �GC
+                                                                                    �GC
+                                                                                       �GD
+                                                                                          GD
+                                                                                            .GD
+                                                                                               IGE
+                                                                                                  dGE
+                                                                                                     �GE
+                                                                                                        �GF
+                                                                                                           �GF
+                                                                                                              �GF
+                                                                                                                 GG
+                                                                                                                   $GG
+                                                                                                                      DGG
+                                                                                                                         dGH
+                                                                                                                            �GH
+                                                                                                                               �GH
+                                                                                                                                  �GI
+                                                                                                                                     �GI
+                                                                                                                                        GI
+                                                                                                                                          $GJ
+                                                                                                                                             DGJ
+                                                                                                                                                dGJ
+                                                                                                                                                   �GN
+                                                                                                                                                      �GN
+                                                                                                                                                         �GO
+                                                                                                                                                            �GO
+                                                                                                                                                               �GP
+                                                                                                                                                                  GP
+                                                                                                                                                                    +GQ
+                                                                                                                                                                       FGQ
+                                                                                                                                                                          aGR
+                                                                                                                                                                             |GR
+                                                                                                                                                                                �GS
+                                                                                                                                                                                   �GS
+                                                                                                                                                                                      �GT
+                                                                                                                                                                                         �GT
+                                                                                                                                                                                            GU
+ $GU
+    ?GV
+       ZGV
+          uGW
+             �GW
+                �GX
+                   �GX
+                      �GY
+                         GY
+                           6GZ
+                              VGZ
+                                 vG[
+                                    �G[
+                                       �G[
+                                          �G[
+                                             G[
+                                               %G\
+                                                  EG\
+                                                     `G]
+                                                        {G]
+                                                           �G^
+                                                              �G^
+                                                                 �G_
+                                                                    �G_
+                                                                       G`
+                                                                         G`
+                                                                           8Ga
+                                                                              SGa
+                                                                                 nGb
+                                                                                    �Gb
+                                                                                       �Gc
+                                                                                          �Gc
+                                                                                             �Gd
+                                                                                                �Gd
+                                                                                                   Ge
+                                                                                                     +Ge
+                                                                                                        FGf
+                                                                                                           aGf
+                                                                                                              �Gg
+                                                                                                                 �Gg
+                                                                                                                    �Gh
+                                                                                                                       �Gh
+                                                                                                                          ␦Gi
+                                                                                                                             !␦Gi
+                                                                                                                                 F␦Gj
+                                                                                                                                     k␦Gj
+                                                                                                                                         �␦Gk
+                                                                                                                                             �␦Gk
+                                                                                                                                                 �␦Gl
+                                                                                                                                                     �␦Gl
+                                                                                                                                                         �␦Gm
+                                                                                                                                                             m
+                                                                                                                                                              7n
+                                                                                                                                                                Wn
+                                                                                                                                                                  ro
+                                                                                                                                                                    �o
+                                                                                                                                                                      ��
+                                                                                                                                                                        ��
+                                                                                                                                                                          ��
+H'
+  ;-H+Y-H.�.H6
+              e,H7
+                  �,H9
+
+H9
+  .
+H9
+  G
+H9
+  `
+H9
+  y
+H9
+  �
+H9
+  �
+H:
+  t-H;
+      �-H<
+          �-H=
+              �-H?
+                  @(H?
+                      2H?
+                         �-HA
+                             �-HC
+                                 .HF
+                                    2.HG
+                                        N.HH
+                                            o.HJ
+                                                �.HK
+                                                    �.HM
+                                                        �.HN
+                                                            �.HO
+                                                                /HP
+                                                                   (/HQ
+                                                                       L/HS
+                                                                           c/HT
+J                                                                              �AI���I��<
+hKM=?:Kl)Sg"Km�(CKn�0p@Ko�<8qKp�O@�>Kq5SH�!Kr�IP5(Ks
+                                                    �HX
+Kt
+!Y= �"K�=L KF	U�KG
+                   �J�= � L�=5-LE��.LFh+"LGU
+                                            -LI�J�= �(M
+                                                      *>o#M
+                                                           �*getM
+�*setM
+      �Y*docM��$M
+                 ��
+                   J6> �
+                        (M�>o#M*��M+	�=M,�<?HM-	U*docM.�)J�> �>?z
+                                                                         �>}�>��(4��4��4G�;|	-��>��>�.H      J? < N6?�Nc�>{%Nd��JB?Y&�O�A�O�[H�$O���GO��< JO��<(�O�5J0a,O��<8�O�RJ@!O��JHRO��OP�@O��JX�-O��O`l%O��Oh+O��Op�
+O��I�fBO��H��O��J��(O�xJ��9O��J��!O��OCO�F���� 
+WK8�	O��J�v.O��<��;O�K�;O�#K��)O��O��7O��O��:O��O�Y<O�.HO��g;O�0KvFO�=K�O��< �O�JK('O��K04"O�
+�HH�O��GP�O�
+*O��GX�@O��G`/9O�
+Ps�G��UT�PsUX� Ps(4\�'Ps�G`�'Ps�GhPs�Gp�!Ps�GxaPs�G�K�a�HO�4�>J	B �>�P�C�Ps[H�<Ps�G�9Ps�G `CPs�G(� PsU0PsU4%PsU8Q(PsU<"PsU@�PsUD�)PsUHd0PsULX
+PsT�{Ps5�&Ps@Ps�S�
+            T��BPs�<��4PsU�
+                           DPs��U
+Ps�0�.J�C �PSD�Q�>�7QT�Q␦W\b#Q�G -Q	U(�<Q
+�,Q
+�-�'Q␦�G05Q�G8`Q$�G@@␦Q&�Q�
+R��G�T>R�F�0*R�F��R��G��-R�5�q?R��{RG�Y6U�HR��G�n=R��G�Y,R��G��R�44�*idR�44����Y��GR�O��<R�O��R�Y�R��G*R�44�R��G!R��G(�R��X0z�{XR��Y�HJ G�_isPS�,�G*bufS
+/S␦   U `4S     $K+S                                                                                                                                    �*objS�*lenS�<�%S�<
+                    �"(S�G0<S�G8M'S�G@S 
+�3HB�:␦6?B�9␦6?R+P�H    �H�G�H�GQ�H     �H�G�H�G�GiR�H	�H�G�H�G�G�G�,SI�GH�HU	IUI�G�T!IH.H�H	&I�<5I�G�UBI��< GI�G[I�G�<e4WhI	mIU�I�G�<�G>Y�I	�IU�I�G�G�G\H[�I	�IU�I�G�G�
+\�I	�IU�I�G�L,]
+J	JU(J�G�I��9`,�"aBJ	GJHRJ�GV1b_J	dJ�GxJ�G�""/c�HWd�J	�JU�J�G�"�G�e�I�f�H�g�J	�J�<�J�G�h�J	�J�GK�G�GUi�HvEj�H�*k�H3␦l�I8m�IW/ndK	iK�G�K.H�G�G�(o�K	�K�G�K.H�<hBr�K	�K�G�K�G�K:�G	�G[�KBB��>�U�jL5/,�45EH.��K\ O=�
+OO�HhSOP�Hp<+OQ�Hx'FOR�H�#S �OG�H(�OH�H0cOI�H8?OJ�HOK
+                           ���+OT�H�V�H��GOW�H�.
+                                                OX�H�>OY�H�OZ�H�mO[�H�[AO\�H��-O]�H�9O^�H�:@O_�H�o
+I�BOn�wOo5I�Op5I�H�)Od�H�%Of�^Oh�HoGOi��Oj$LPOl#�N);Om
+                 Oq
+                   � �Or[I(�Os
+�GO�uO~�iO��N   OLO�G�GO      �0�G[O O�iO:7O��H�8O���O��HDO��(.O�'OO�w@�O{O��GO=O�
+�4>Q�W�>�W�GV9W�G7W�G W�G(Y,W�G0H@W�G8�W��	W�2&N+(4 "@N]~Q�N^5�CN_P&�CUyo&�!U�o&�U�o&�U�o&$U�o�Uc�>�=Ud�<Y2Ue�<t(U��O�<U��O$�-VM�G$�@VX�G$Z*V]�G$�Ve�G$�Vg�G$�+Vp�GHW
+                                                                       ~␦JQ�Q"@N`VQ$ 0X␦?$�
+X␦?$wY␦6?(Z�Q�Z[Hj'�<�9Z
+                        �Q ␦�GRl
+�Q$�[␦6?(`9PR�[H�O�B�<d?$�BL␦6�"L�H8\\ �R��>j#\	�O�\
+�G�\
+    �G �&\
+�G ��GR �K:�R�K(M=mK/$S�?S�GSS�G� P
+                                   �S�P
+�!:P�G�P��PSSP��S�5P    U�P     U�P�␦�S�SFP     �S:eP�S	�S	�S:@	T	�A	�C ]
+?
+~T�o]
+
+
+=== Native build artifacts outside bin ===
+./.bin/g++-debug-Oauto-sanitize-none/openage/game/main_cpp.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/event/demo.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/log/log_cpp.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/gamestate/tests.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/testing/cpp_testing.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/testing/misc_cpp.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/main/tests.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/main/main_cpp.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/cvar/cvar.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/pathfinding/tests.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/versions/versions.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/util/fslike/cpp.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/util/filelike/cpp.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/cython_check.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/convert/service/export/interface/visgrep.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/convert/service/export/opus/opusenc.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/convert/service/export/png/binpack.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/convert/service/export/png/png_create.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/convert/processor/export/texture_merge.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/convert/processor/export/terrain_merge.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/convert/value_object/read/media/smp.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/convert/value_object/read/media/slp.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/convert/value_object/read/media/smx.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/convert/value_object/read/media/sld.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/cabextract/cabchecksum.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/cabextract/lzxd.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/renderer/tests.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/renderer/renderer_cpp.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/cppinterface/exctranslate_tests.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/cppinterface/pyobject.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/cppinterface/setup_checker.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/openage/cppinterface/exctranslate.cpython-314-x86_64-linux-gnu.so
+./.bin/g++-debug-Oauto-sanitize-none/libopenage/libopenage.so.0
+./.bin/g++-debug-Oauto-sanitize-none/CMakeCache.txt
+./.venv/lib/python3.14/site-packages/PIL/_imagingmorph.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/PIL/_imagingft.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/PIL/_imagingmath.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/PIL/_webp.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/PIL/_imagingtk.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/PIL/_avif.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/PIL/_imagingcms.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/PIL/_imaging.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/lz4/block/_block.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/lz4/frame/_frame.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/lz4/_version.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/random/_common.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/random/bit_generator.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/random/_pcg64.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/random/_bounded_integers.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/random/_mt19937.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/random/mtrand.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/random/_sfc64.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/random/_philox.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/random/_generator.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/_core/_multiarray_tests.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/_core/_struct_ufunc_tests.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/_core/_multiarray_umath.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/_core/_rational_tests.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/_core/_umath_tests.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/_core/_simd.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/_core/_operand_flag_tests.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/fft/_pocketfft_umath.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/linalg/lapack_lite.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy/linalg/_umath_linalg.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so
+./.venv/lib/python3.14/site-packages/numpy.libs/libgfortran-83c28eba-468e71e5.so.5.0.0
+./.venv/lib/python3.14/site-packages/numpy.libs/libquadmath-2284e583-a9307bba.so.0.0.0
+./.venv/lib/python3.14/site-packages/Cython/_shared.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/Compiler/FusedNode.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/Compiler/FlowControl.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/Compiler/Parsing.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/Compiler/LineTable.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/Compiler/Code.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/Compiler/StringEncoding.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/Compiler/Visitor.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/Compiler/Scanning.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/StringIOTree.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/Utils.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/Runtime/refnanny.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/Tempita/_tempita.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/LZSS.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/Plex/Actions.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/Plex/Transitions.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/Plex/DFA.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/Plex/Scanners.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/Cython/Plex/Machines.cpython-314-x86_64-linux-gnu.so
+./.venv/lib/python3.14/site-packages/pillow.libs/libwebp-51b0b3f7.so.7.2.0
+./.venv/lib/python3.14/site-packages/pillow.libs/libXau-154567c4.so.6.0.0
+./.venv/lib/python3.14/site-packages/pillow.libs/libjpeg-31e2ca52.so.62.4.0
+./.venv/lib/python3.14/site-packages/pillow.libs/libzstd-44be1190.so.1.5.7
+./.venv/lib/python3.14/site-packages/pillow.libs/liblzma-2be87c3e.so.5.8.3
+./.venv/lib/python3.14/site-packages/pillow.libs/libavif-8a7f9d56.so.16.4.2
+./.venv/lib/python3.14/site-packages/pillow.libs/libbrotlidec-7e5462ba.so.1.2.0
+./.venv/lib/python3.14/site-packages/pillow.libs/libfreetype-9fc94c80.so.6.20.6
+./.venv/lib/python3.14/site-packages/pillow.libs/libharfbuzz-172d1f63.so.0.61421.0
+./.venv/lib/python3.14/site-packages/pillow.libs/libpng16-abb096d5.so.16.58.0
+./.venv/lib/python3.14/site-packages/pillow.libs/libopenjp2-b07f72ad.so.2.5.4
+./.venv/lib/python3.14/site-packages/pillow.libs/libsharpyuv-0066295b.so.0.1.2
+./.venv/lib/python3.14/site-packages/pillow.libs/liblcms2-dade1fbf.so.2.0.19
+./.venv/lib/python3.14/site-packages/pillow.libs/libwebpmux-8fb1c9f6.so.3.1.2
+./.venv/lib/python3.14/site-packages/pillow.libs/libbrotlicommon-53534446.so.1.2.0
+./.venv/lib/python3.14/site-packages/pillow.libs/libtiff-fc87e79d.so.6.2.0
+./.venv/lib/python3.14/site-packages/pillow.libs/libxcb-ad31f5a3.so.1.1.0
+./.venv/lib/python3.14/site-packages/pillow.libs/libwebpdemux-9fe2abcc.so.2.0.17
+./.venv/lib/python3.14/site-packages/markupsafe/_speedups.cpython-314-x86_64-linux-gnu.so
+
+=== GUI source files ===
+libopenage/engine/engine.cpp
+libopenage/engine/engine.h
+libopenage/event/demo/main.h
+libopenage/event/demo/main.cpp
+libopenage/event/demo/gui.cpp
+libopenage/event/demo/gui.h
+libopenage/main.h
+libopenage/main.cpp
+libopenage/main/demo/pong/gamestate.h
+libopenage/main/demo/pong/aicontroller.h
+libopenage/main/demo/pong/aicontroller.cpp
+libopenage/main/demo/pong/gamestate.cpp
+libopenage/main/demo/pong/gui.cpp
+libopenage/main/demo/pong/pong.h
+libopenage/main/demo/pong/physics.h
+libopenage/main/demo/pong/pong.cpp
+libopenage/main/demo/pong/physics.cpp
+libopenage/main/demo/pong/gui.h
+libopenage/main/demo/presenter/presenter.cpp
+libopenage/main/demo/presenter/presenter.h
+libopenage/main/demo/interactive/interactive.h
+libopenage/main/demo/interactive/interactive.cpp
+libopenage/main/tests.cpp
+libopenage/main/tests.h
+libopenage/presenter/presenter.cpp
+libopenage/presenter/presenter.h
+libopenage/renderer/gui/guisys/link/gui_property_map_impl.h
+libopenage/renderer/gui/guisys/link/gui_property_map_impl.cpp
+libopenage/renderer/gui/guisys/link/gui_singleton_item.cpp
+libopenage/renderer/gui/guisys/link/qtgui_checked_static_cast.h
+libopenage/renderer/gui/guisys/link/gui_item_list_model.h
+libopenage/renderer/gui/guisys/link/gui_list_model.h
+libopenage/renderer/gui/guisys/link/gui_item.h
+libopenage/renderer/gui/guisys/link/gui_singleton_item.h
+libopenage/renderer/gui/guisys/link/gui_item.cpp
+libopenage/renderer/gui/guisys/link/gui_list_model.cpp
+libopenage/renderer/gui/guisys/link/gui_item_link.h
+libopenage/renderer/gui/guisys/private/opengl_debug_logger.h
+libopenage/renderer/gui/guisys/private/gui_rendering_setup_routines.h
+libopenage/renderer/gui/guisys/private/gui_ctx_setup.cpp
+libopenage/renderer/gui/guisys/private/gui_renderer_impl.cpp
+libopenage/renderer/gui/guisys/private/opengl_debug_logger.cpp
+libopenage/renderer/gui/guisys/private/gui_application_impl.h
+libopenage/renderer/gui/guisys/private/gui_engine_impl.cpp
+libopenage/renderer/gui/guisys/private/gui_subtree_impl.h
+libopenage/renderer/gui/guisys/private/gui_input_impl.h
+libopenage/renderer/gui/guisys/private/gui_subtree_impl.cpp
+libopenage/renderer/gui/guisys/private/gui_rendering_setup_routines.cpp
+libopenage/renderer/gui/guisys/private/livereload/recursive_directory_watcher.h
+libopenage/renderer/gui/guisys/private/livereload/recursive_directory_watcher_worker.h
+libopenage/renderer/gui/guisys/private/livereload/recursive_directory_watcher_worker.cpp
+libopenage/renderer/gui/guisys/private/livereload/deferred_initial_constant_property_values.h
+libopenage/renderer/gui/guisys/private/livereload/gui_live_reloader.cpp
+libopenage/renderer/gui/guisys/private/livereload/recursive_directory_watcher.cpp
+libopenage/renderer/gui/guisys/private/livereload/deferred_initial_constant_property_values.cpp
+libopenage/renderer/gui/guisys/private/livereload/gui_live_reloader.h
+libopenage/renderer/gui/guisys/private/gui_engine_impl.h
+libopenage/renderer/gui/guisys/private/gui_renderer_impl.h
+libopenage/renderer/gui/guisys/private/gui_application_impl.cpp
+libopenage/renderer/gui/guisys/private/gui_ctx_setup.h
+libopenage/renderer/gui/guisys/private/gui_input_impl.cpp
+libopenage/renderer/gui/guisys/public/gui_renderer.h
+libopenage/renderer/gui/guisys/public/gui_input.h
+libopenage/renderer/gui/guisys/public/gui_engine.cpp
+libopenage/renderer/gui/guisys/public/gui_application.h
+libopenage/renderer/gui/guisys/public/gui_subtree.h
+libopenage/renderer/gui/guisys/public/gui_engine.h
+libopenage/renderer/gui/guisys/public/gui_renderer.cpp
+libopenage/renderer/gui/guisys/public/gui_input.cpp
+libopenage/renderer/gui/guisys/public/gui_subtree.cpp
+libopenage/renderer/gui/guisys/public/gui_application.cpp
+libopenage/renderer/gui/gui.cpp
+libopenage/renderer/gui/integration/private/gui_log.cpp
+libopenage/renderer/gui/integration/private/gui_standalone_subtexture.h
+libopenage/renderer/gui/integration/private/gui_log.h
+libopenage/renderer/gui/integration/private/gui_texture_handle.h
+libopenage/renderer/gui/integration/private/gui_make_standalone_subtexture.h
+libopenage/renderer/gui/integration/private/gui_standalone_subtexture.cpp
+libopenage/renderer/gui/integration/private/gui_texture.h
+libopenage/renderer/gui/integration/private/gui_texture.cpp
+libopenage/renderer/gui/integration/private/gui_texture_handle.cpp
+libopenage/renderer/gui/integration/private/gui_make_standalone_subtexture.cpp
+libopenage/renderer/gui/integration/private/gui_filled_texture_handles.cpp
+libopenage/renderer/gui/integration/private/gui_filled_texture_handles.h
+libopenage/renderer/gui/integration/public/gui_application_with_logger.cpp
+libopenage/renderer/gui/integration/public/gui_application_with_logger.h
+libopenage/renderer/gui/gui.h
+
+=== Git status ===
